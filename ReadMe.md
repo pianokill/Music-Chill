@@ -1,2 +1,2 @@
-#test
-Code giao diện phát nhạc và có thể là trang about us => DL đến thứ 3
+hello
+ở đây mình sẽ code giao diện nhạc cơ bản trước
