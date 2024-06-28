@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
 }
 
 .music-player{
@@ -65,11 +65,4 @@
 .btn{
   font-size: 36px;
   cursor: pointer;
-}
-
-.btn-play{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
 }
