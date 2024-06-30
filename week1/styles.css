@@ -1,34 +1,141 @@
 
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+
 }
 
-.container{
-  width: 100%;
+body{
   height: 100vh;
-  background: #333;
+  width: 100%;
+  background-image: url(image/background.jpg);
+  background-size: cover;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: flex;
 }
 
-.music-player{
-  background: #fff;
+.header, .song_side, .toplist, .acc{
+  position: relative;
+  overflow: auto;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 25%;
+  height: 22%;
+  background-color: rgba(82, 73, 73, 0.5);
+  border-radius: 10px;
+}
+.acc{
+  position: absolute;
+  margin-top: 12%;
+  height: 59%;
+
+}
+.song_side{
+  position: fixed;
+  border-radius: 0px;
+  margin: 0;
+  width: 100%;
+  height: 20%;
+  margin-top: 40%;
+}
+
+.toplist{
+  position: absolute;
+  margin-left: 74%;
+  height: 83%;
+}
+
+.header .bar{
+  list-style-type: none;
+  overflow: hidden;
+}
+.header .bar .bar_item a{
+  color: rgb(152, 144, 144);
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  padding: 8px 0 0 20px;
+  margin-left: 50px;
+}
+
+.header .bar .bar_item a:hover{
+  color: white;
+}
+
+.header .bar .bar_item a .icons{
+   position: absolute;
+   margin-left: -40px;
+   margin-top: 3px;
+}
+
+
+.acc .youracc{
+  margin: 5px 5px 0 5px;
+  color: rgb(30, 28, 28);
+  background-color: white;
+  font-size: 24px;
+  text-align: center;
+  font-weight: 30px;
+  border-radius: 10px;
+}
+
+.acc .upandin{
+  display: flex;
+}
+
+.acc .upandin .signup a, .login a{
+  color: rgb(152, 144, 144);
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  position: absolute;
+  margin-top: 20px;
+}
+
+.acc .upandin .signup a{
+  background-color: rgb(45, 52, 145);
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  margin-left: 20px;
+}
+.acc .upandin .login a:hover{
+  color: white;
+}
+
+.acc .upandin .login a{
+  margin-left: 60%;
+  margin-top: 30px;
+}
+
+.acc .upandin .signup a:hover{
+  background-color: rgb(45, 52, 145);
+  border-radius: 10px;
+  color: aliceblue;
+  margin: 10px 10px 10px 10px;
+  padding: 15px 30px 20px 25px;
+}
+
+.music{
+ margin-left: 8%;
+ margin-top: 20px;
+}
+.music .music-player{
+  background: rgba(101, 82, 82, 0.95);
   width: 400px;
   padding: 25px 35px;
   text-align: center;
   border-radius: 5%;
 }
 
-.info{
+.music .music-player .info{
   margin-bottom: 15px;
 }
 
-.song-img{
+.music .music-player .song-img{
   width: 300px;
   height: 300px;
   background-image: url('https://images.genius.com/0ae965f321d9c298ebc9cf56260cc7eb.1000x1000x1.jpg');
@@ -38,13 +145,16 @@
   margin: 15px auto;
 }
 
-#progress{
+.song_side #progress{
   -webkit-appearance: none;
-  width: 100%;
+  width: 40%;
   height: 5px;
   background: #39aae2;
   opacity: 0.5;
   cursor: pointer;
+  align-items: center;
+  margin-left: 30%;
+  margin-top: 1%;
 }
 
 #progress::-webkit-slider-thumb{
@@ -56,13 +166,10 @@
   border-radius: 50%;
 }
 
-.control{
+.song_side .control{
   display: flex;
-  justify-content: space-around;
-  margin-top: 15px;
-}
-
-.btn{
-  font-size: 36px;
-  cursor: pointer;
+  justify-content: space-between;
+  width: 10%;
+  margin-left: 45%;
+  margin-top: 20px;
 }
