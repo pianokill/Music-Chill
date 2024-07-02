@@ -39,8 +39,10 @@ body{
   border-radius: 0px;
   margin: 0;
   width: 100%;
-  height: 20%;
-  margin-top: 40%;
+  height: 12%;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
 }
 
 .toplist{
@@ -49,11 +51,12 @@ body{
   height: 83%;
 }
 
-.header .bar{
+.bar{
   list-style-type: none;
   overflow: hidden;
 }
-.header .bar .bar_item a{
+
+.bar_item a{
   color: rgb(152, 144, 144);
   text-decoration: none;
   font-size: 20px;
@@ -62,18 +65,18 @@ body{
   margin-left: 50px;
 }
 
-.header .bar .bar_item a:hover{
+.bar_item a:hover{
   color: white;
 }
 
-.header .bar .bar_item a .icons{
+.icons{
    position: absolute;
    margin-left: -40px;
    margin-top: 3px;
 }
 
 
-.acc .youracc{
+.youracc{
   margin: 5px 5px 0 5px;
   color: rgb(30, 28, 28);
   background-color: white;
@@ -83,7 +86,7 @@ body{
   border-radius: 10px;
 }
 
-.acc .upandin{
+.upandin{
   display: flex;
 }
 
@@ -102,6 +105,7 @@ body{
   padding: 10px 20px 10px 20px;
   margin-left: 20px;
 }
+
 .acc .upandin .login a:hover{
   color: white;
 }
@@ -123,27 +127,29 @@ body{
  margin-left: 8%;
  margin-top: 20px;
 }
-.music .music-player{
+.music-player{
   background: rgba(101, 82, 82, 0.95);
   width: 400px;
   padding: 25px 35px;
   text-align: center;
   border-radius: 5%;
+  box-shadow: rgba(213, 206, 206, 0.95);
 }
 
-.music .music-player .info{
+.info{
   margin-bottom: 15px;
 }
 
-.music .music-player .song-img{
+.song-img{
   width: 300px;
   height: 300px;
-  background-image: url('https://images.genius.com/0ae965f321d9c298ebc9cf56260cc7eb.1000x1000x1.jpg');
+  background-image: url('https://github.com/fantastichaha11/storage/blob/main/image/1.jpg?raw=true');
   background-size: cover;
   border-radius: 5%;
   border: 5px solid #ccc;
   margin: 15px auto;
 }
+
 
 .song_side #progress{
   -webkit-appearance: none;
@@ -152,9 +158,9 @@ body{
   background: #39aae2;
   opacity: 0.5;
   cursor: pointer;
-  align-items: center;
+  position: relative;
+  border-radius: 10px;
   margin-left: 30%;
-  margin-top: 1%;
 }
 
 #progress::-webkit-slider-thumb{
@@ -172,4 +178,26 @@ body{
   width: 10%;
   margin-left: 45%;
   margin-top: 20px;
+}
+
+.timer{
+  flex-wrap: wrap;
+  position: absolute;
+  display: flex;
+  font-size: 13px;
+  justify-content: space-around;
+  top: 0;
+  width: 100%;
+  height: 12%;
+  color: #f2f8fa;
+  align-items: center;
+  margin-top: 46px;
+}
+
+.time_start{
+  margin-left: 45px;
+}
+
+.time_end{
+  margin-right: 45px;
 }
