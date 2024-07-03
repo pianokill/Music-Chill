@@ -13,6 +13,7 @@ export default class MusicPlayer {
         this.playButton = document.querySelector(config.buttonSelectors.play);
         this.prevButton = document.querySelector(config.buttonSelectors.prev);
         this.nextButton = document.querySelector(config.buttonSelectors.next);
+        this.shuffButton = document.querySelector(config.buttonSelectors.shuff);
 
         this.songNameElement = document.querySelector(config.songInfoSelectors.name);
         this.artistElement = document.querySelector(config.songInfoSelectors.artist);
@@ -24,6 +25,7 @@ export default class MusicPlayer {
 
         this.#audio = new Audio();
         this.isPlaying = false;
+        this.shuffer = false;   
         this.currentSongIndex = 0;
         
 
@@ -31,6 +33,7 @@ export default class MusicPlayer {
         this.playButton.addEventListener('click', () => this.togglePlayPause());
         this.prevButton.addEventListener('click', () => this.navigateSong(-1));
         this.nextButton.addEventListener('click', () => this.navigateSong(1));
+        this.shuffButton.addEventListener('click',() => this.shufferMusic());
         this.#audio.addEventListener('ended', () => this.navigateSong(1));
         this.timeBar.addEventListener('change', () => this.changeTimeBar());
     }
@@ -113,11 +116,29 @@ export default class MusicPlayer {
         this.playButton.querySelector('i').classList.toggle('fa-pause');
     }
 
+    //shuffer
+
+    shufferMusic(){
+        console.log(this.shuffButton);
+        if (this.shuffer){ 
+            this.shuffer = false;
+            this.shuffButton.style.color = 'black';
+        }
+        else {
+            this.shuffer = true;
+            this.shuffButton.style.color = '#39aae2';
+        }
+    }
     // Navigate to the previous or next song
     navigateSong(direction) {
         if (!this.isPlaying) this.togglePlayButtonIcon();
-        
-        this.currentSongIndex = (this.currentSongIndex + direction + this.#songData.length) % this.#songData.length;
+        if (this.shuffer){
+            this.currentSongIndex = Math.floor(Math.random() * this.#songData.length) % this.#songData.length;
+        }
+        else
+        {
+            this.currentSongIndex = (this.currentSongIndex + direction + this.#songData.length) % this.#songData.length;
+        }
         this.loadSong(this.currentSongIndex);
         this.playAudio();
         if (!this.#timerInterval) {

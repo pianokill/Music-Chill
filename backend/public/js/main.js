@@ -6,7 +6,9 @@ const player = new MusicPlayer({
     buttonSelectors: {
         play: '.play',
         prev: '.prev',
-        next: '.next'
+        next: '.next',
+        shuff: '.shuffer',
+        repeat: '.repeat'
     },
     timeSelectors: {
         start: '.time_start',
