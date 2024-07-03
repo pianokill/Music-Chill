@@ -6,7 +6,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-
 }
 
 body{
@@ -21,6 +20,7 @@ body{
 .header, .song_side, .toplist, .acc{
   position: relative;
   overflow: auto;
+  flex-wrap: wrap;
   margin-top: 10px;
   margin-left: 10px;
   width: 25%;
@@ -28,6 +28,7 @@ body{
   background-color: rgba(82, 73, 73, 0.5);
   border-radius: 10px;
 }
+
 .acc{
   position: absolute;
   margin-top: 12%;
@@ -112,14 +113,14 @@ body{
 
 .acc .upandin .login a{
   margin-left: 60%;
-  margin-top: 30px;
+  margin-top: 12%;
 }
 
 .acc .upandin .signup a:hover{
   background-color: rgb(45, 52, 145);
   border-radius: 10px;
   color: aliceblue;
-  margin: 10px 10px 10px 10px;
+  margin: 5%;
   padding: 15px 30px 20px 25px;
 }
 

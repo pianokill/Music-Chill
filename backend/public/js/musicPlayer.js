@@ -32,7 +32,7 @@ export default class MusicPlayer {
         this.prevButton.addEventListener('click', () => this.navigateSong(-1));
         this.nextButton.addEventListener('click', () => this.navigateSong(1));
         this.#audio.addEventListener('ended', () => this.navigateSong(1));
-        this.timeBar.addEventListener("change", () => this.changeTimeBar());
+        this.timeBar.addEventListener('change', () => this.changeTimeBar());
     }
 
     // Initialize the music player
