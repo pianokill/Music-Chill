@@ -1,3 +1,4 @@
+
 const hostUrlAudio = "https://github.com/fantastichaha11/storage/blob/main/audio/";
 const hostUrlImg = "https://github.com/fantastichaha11/storage/blob/main/image/";
 let songData = [
@@ -70,3 +71,4 @@ function togglePlayButton() {
     document.querySelector('.play i').classList.toggle('fa-play');
     document.querySelector('.play i').classList.toggle('fa-pause');
 }
+
