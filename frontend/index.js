@@ -1,35 +1,41 @@
 const hostUrlAudio = "https://github.com/fantastichaha11/storage/blob/main/audio/";
 const hostUrlImg = "https://github.com/fantastichaha11/storage/blob/main/image/";
-let songData;
+let songData = [
+    {id: 1, name: "Magnetic", artist: "ILLIT", },
+    {id: 2, name: "Simp Gái 808", artist: "Low G"},
+];
 const audio = new Audio();
 let isPlaying = false;
 let currentSongIndex = 0;
 
-window.onload = async () => {
-    let response = await fetch('/api/songs');
-    songData = await response.json();
-    const audioUrl = hostUrlAudio + `${songData[0].id}.mp3?raw=true`;
-    audio.src = audioUrl;
-}
+const audioUrl = hostUrlAudio + `${songData[0].id}.mp3?raw=true`;
+audio.src = audioUrl;
+const songName = document.querySelector('.song-name');
+const artist = document.querySelector('.artist-name');
+const songImg = document.querySelector('.song-img');
+const imageUrl = hostUrlImg + `${songData[currentSongIndex].id}.jpg?raw=true`;
+songName.textContent = songData[currentSongIndex].name;
+artist.textContent = songData[currentSongIndex].artist;
+songImg.style.backgroundImage = `url(${imageUrl})`;
 
 const playButton = document.querySelector('.play');
 playButton.addEventListener('click', () => {
     if (isPlaying) {
         audio.pause();
-        document.querySelector('.play i').classList.remove('fa-pause');
-        document.querySelector('.play i').classList.add('fa-play');
+        togglePlayButton();
         isPlaying = false;
     }
     else {
         audio.play();
-        document.querySelector('.play i').classList.remove('fa-play');
-        document.querySelector('.play i').classList.add('fa-pause');
+        togglePlayButton();
         isPlaying = true;
     }
 });
 
 const prevButton = document.querySelector('.prev');
 prevButton.addEventListener('click', () => {
+    if (!isPlaying) togglePlayButton();
+
     currentSongIndex = (currentSongIndex - 1 + songData.length) % songData.length;
     const audioUrl = hostUrlAudio + `${songData[currentSongIndex].id}.mp3?raw=true`;
     audio.src = audioUrl;
@@ -40,6 +46,8 @@ prevButton.addEventListener('click', () => {
 
 const nextButton = document.querySelector('.next');
 nextButton.addEventListener('click', () => {
+    if (!isPlaying) togglePlayButton();
+
     currentSongIndex = (currentSongIndex + 1) % songData.length;
     const audioUrl = hostUrlAudio + `${songData[currentSongIndex].id}.mp3?raw=true`;
     audio.src = audioUrl;
@@ -49,13 +57,16 @@ nextButton.addEventListener('click', () => {
 });
 
 function updateSongInfo() {
-    const songName = document.querySelector('.song-name');
-    const artist = document.querySelector('.artist-name');
-    const songImg = document.querySelector('.song-img');
+    
 
     const imageUrl = hostUrlImg + `${songData[currentSongIndex].id}.jpg?raw=true`;
 
     songName.textContent = songData[currentSongIndex].name;
     artist.textContent = songData[currentSongIndex].artist;
     songImg.style.backgroundImage = `url(${imageUrl})`;
+}
+
+function togglePlayButton() {
+    document.querySelector('.play i').classList.toggle('fa-play');
+    document.querySelector('.play i').classList.toggle('fa-pause');
 }

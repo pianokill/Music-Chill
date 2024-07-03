@@ -1,16 +1,15 @@
 {
-  "name": "music-chill",
+  "name": "music_chill",
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "nodemon server.js"
   },
-  "author": "hhskk",
+  "author": "HHSKK",
   "license": "ISC",
-  "description": "a music player app",
+  "description": "",
   "dependencies": {
-    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "nodemon": "^3.1.4"
   }
