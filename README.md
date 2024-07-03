@@ -3,12 +3,10 @@
 ## Installation
 Install NodeJS: https://nodejs.org/en
 
-```sh
-$ cd backend/
-```
 
 Install all the packages in package.json
 ```sh
+$ cd backend/
 $ npm install
 ```
 
