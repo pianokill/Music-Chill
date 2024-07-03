@@ -10,17 +10,17 @@ export default class MusicPlayer {
     constructor(config) {
         this.apiUrl = config.apiUrl;
 
-        this.playButton = document.querySelector(config.playButtonSelector);
-        this.prevButton = document.querySelector(config.prevButtonSelector);
-        this.nextButton = document.querySelector(config.nextButtonSelector);
+        this.playButton = document.querySelector(config.buttonSelectors.play);
+        this.prevButton = document.querySelector(config.buttonSelectors.prev);
+        this.nextButton = document.querySelector(config.buttonSelectors.next);
 
         this.songNameElement = document.querySelector(config.songInfoSelectors.name);
         this.artistElement = document.querySelector(config.songInfoSelectors.artist);
         this.songImgElement = document.querySelector(config.songInfoSelectors.image);
 
-        this.timeStart = document.querySelector('.time_start');
-        this.timeEnd = document.querySelector('.time_end');
-        this.timeBar = document.querySelector('#progress');
+        this.timeStart = document.querySelector(config.timeSelectors.start);
+        this.timeEnd = document.querySelector(config.timeSelectors.end);
+        this.timeBar = document.querySelector(config.timeSelectors.bar);
 
         this.#audio = new Audio();
         this.isPlaying = false;
