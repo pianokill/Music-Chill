@@ -3,9 +3,16 @@ import MusicPlayer from './musicPlayer.js';
 // Initialize the music player with the configuration object
 const player = new MusicPlayer({
     apiUrl: '/api/songs',
-    playButtonSelector: '.play',
-    prevButtonSelector: '.prev',
-    nextButtonSelector: '.next',
+    buttonSelectors: {
+        play: '.play',
+        prev: '.prev',
+        next: '.next'
+    },
+    timeSelectors: {
+        start: '.time_start',
+        end: '.time_end',
+        bar: '#progress'
+    },
     songInfoSelectors: {
         name: '.song-name',
         artist: '.artist-name',
