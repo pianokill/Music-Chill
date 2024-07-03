@@ -1,6 +1,7 @@
 
 
 ## Installation
+Install NodeJS: https://nodejs.org/en
 
 ```sh
 $ cd backend/
