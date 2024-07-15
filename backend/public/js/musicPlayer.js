@@ -70,6 +70,7 @@ export default class MusicPlayer {
         const audioUrl = `${HOST_URL_AUDIO}${song.id}.mp3?raw=true`;
         this.#audio.src = audioUrl;
         this.updateSongInfo(song);
+        this.displayQueueSongs(index);
         this.#audio.addEventListener('loadedmetadata', () => {
             this.displayTimer();
         });
@@ -81,6 +82,37 @@ export default class MusicPlayer {
         this.songNameElement.textContent = song.name;
         this.artistElement.textContent = song.artist;
         this.songImgElement.style.backgroundImage = `url(${imageUrl})`;
+    }
+
+    displayQueueSongs(currentIndex){
+        let queueElement = document.querySelector('ul.queue');
+        queueElement.innerHTML = '';
+        for (var i = currentIndex + 1;i < this.#songData.length;i++){
+            let imgUrl = `${HOST_URL_IMG}${this.#songData[i].id}.jpg?raw=true`;
+            console.log(imgUrl);
+            let songQueueElement = document.createElement('li');
+            songQueueElement.classList.add('music-items');
+            songQueueElement.innerHTML = 
+            `<div class="item-img" style="background-image: url(${imgUrl})"></div>
+            <div class="item-info">
+                <div class="item-name">${this.#songData[i].name}</div>
+                <div class="item-onwer">${this.#songData[i].artist}</div>
+            </div>`;
+            queueElement.appendChild(songQueueElement);
+        }
+        for (var i = 0;i < currentIndex;i++){
+            let imgUrl = `${HOST_URL_IMG}${this.#songData[i].id}.jpg?raw=true`;
+            console.log(imgUrl);
+            let songQueueElement = document.createElement('li');
+            songQueueElement.classList.add('music-items');
+            songQueueElement.innerHTML = 
+            `<div class="item-img" style="background-image: url(${imgUrl})"></div>
+            <div class="item-info">
+                <div class="item-name">${this.#songData[i].name}</div>
+                <div class="item-owner">${this.#songData[i].artist}</div>
+            </div>`;
+            queueElement.appendChild(songQueueElement);
+        }
     }
 
     // Toggle play and pause state

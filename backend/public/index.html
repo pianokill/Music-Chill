@@ -13,76 +13,81 @@
     <body>
         <div class="app">
             <!-- Left sidebar -->
-            <div class="sidebar left">
-                <div class="sidebar-nav menu box">
-                    <ul class="sidebar-list menu">
-                        <li class="sidebar-item">
-                            <a href="" class="sidebar-item-link">
-                                <i class="sidebar-icon fa-solid fa-house"></i>
+            <div class="left-sidebar">
+                <div class="left-sidebar-nav menu box">
+                    <ul class="left-sidebar-list">
+                        <li class="left-sidebar-item">
+                            <a href="" class="left-sidebar-item-link">
+                                <i class="left-sidebar-icon fa-solid fa-house"></i>
                                 Home
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="" class="sidebar-item-link">
-                                <i class="sidebar-icon fa-solid fa-magnifying-glass"></i>
+                        <li class="left-sidebar-item">
+                            <a href="" class="left-sidebar-item-link">
+                                <i class="left-sidebar-icon fa-solid fa-magnifying-glass"></i>
                                 Search
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="sidebar-nav playlist box">
+                <div class="left-sidebar-nav playlist box">
                     <header class="playlist-header">
-                        <ul class="sidebar-list">
-                            <li class="sidebar-item">
-                                <a href="" class="sidebar-item-link">
-                                    <i class="sidebar-icon fa-solid fa-book"></i>
+                        <ul class="left-sidebar-list">
+                            <li class="left-sidebar-item">
+                                <a href="" class="left-sidebar-item-link">
+                                    <i class="left-sidebar-icon fa-solid fa-book"></i>
                                     Your library
                                 </a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="" class="sidebar-item-link">
-                                    <i class="sidebar-icon fa-solid fa-magnifying-glass"></i>
+                            <li class="left-sidebar-item">
+                                <a href="" class="left-sidebar-item-link">
+                                    <i class="left-sidebar-icon fa-solid fa-magnifying-glass"></i>
                                 </a>
                             </li>
                         </ul>
                     </header>
                     
                     <div class="scroll-container">
-                        <div class="playlist-n-th">
-                            <h4>image</h4>
-                            <h5>playlist name</h5>
-                        </div>
-                        <div class="playlist-n-th">
-                            <h4>image</h4>
-                            <h5>playlist name</h5>
-                        </div>
-                        <div class="playlist-n-th">
-                            <h4>image</h4>
-                            <h5>playlist name</h5>
-                        </div>
-                        <div class="playlist-n-th">
-                            <h4>image</h4>
-                            <h5>playlist name</h5>
-                        </div>
-                        <div class="playlist-n-th">
-                            <h4>image</h4>
-                            <h5>playlist name</h5>
-                        </div>
-                        <div class="playlist-n-th">
-                            <h4>image</h4>
-                            <h5>playlist name</h5>
-                        </div>
-                        <div class="playlist-n-th">
-                            <h4>image</h4>
-                            <h5>playlist name</h5>
-                        </div>
+                        <ul class="music-list">
+                            <li class="music-items">
+                                <div class="item-img"></div>
+                                <div class="item-info">
+                                    <div class="item-name">Name</div>
+                                    <div class="item-artist">Item owner</div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
             <!-- Right sidebar -->
-            <div class="sidebar box">
-                
+            <div class="right-sidebar box">
+                <header class="right-sidebar-header">
+                    <div class="right-sidebar-nav">
+                        <div class="circle">
+                            <i class="header-icon fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                </header>
+                <div class="scroll-container">
+                    <ul class="music-list queue">
+                        <li class="music-items">
+                            <div class="item-img"></div>
+                            <div class="item-info">
+                                <div class="item-name">Name</div>
+                                <div class="item-owner">Item owner</div>
+                            </div>
+                        </li>
+                        <li class="music-items">
+                            <div class="item-img"></div>
+                            <div class="item-info">
+                                <div class="item-name">Name</div>
+                                <div class="item-owner">Item owner</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Main container -->
@@ -90,18 +95,18 @@
                 <header class="main-header">
                     <div class="main-nav">
                         <div class="main-nav-left">
-                            <div class="btn-circle">
-                                <i class="main-icon fa-solid fa-angle-left"></i>
+                            <div class="circle">
+                                <i class="header-icon fa-solid fa-angle-left"></i>
                             </div>
-                            <div class="btn-circle">
-                                <i class="main-icon fa-solid fa-angle-right"></i>
+                            <div class="circle">
+                                <i class="header-icon fa-solid fa-angle-right"></i>
                             </div>
                         </div>
                         <div class="main-nav-right">
-                            <div class="btn-circle">
-                                <i class="main-icon fa-solid fa-bell"></i>
+                            <div class="circle">
+                                <i class="header-icon fa-solid fa-bell"></i>
                             </div>
-                            <div class="btn-circle">
+                            <div class="circle">
 
                             </div>
                         </div>
@@ -110,7 +115,7 @@
 
                 <div class="main-player">
                     <div class="song-img"></div>
-                    <div class="info">
+                    <div class="song-info">
                         <div class="song-name">Song name</div>
                         <div class="artist-name">Artist name</div>
                     </div>
@@ -121,7 +126,7 @@
                 <div class="playingbar-left"></div>
                 <div class="playingbar-main">
                     <div class="control">
-                        <div class="shuffer">
+                        <div class="btn shuffer">
                             <i class="playingbar-icon fa-solid fa-shuffle"></i>
                         </div>
                         <div class="btn prev">
@@ -133,7 +138,7 @@
                         <div class="btn next">
                             <i class="playingbar-icon fa-solid fa-forward-step"></i>
                         </div>
-                        <div class="repeat">
+                        <div class="btn repeat">
                             <i class="playingbar-icon fa-solid fa-repeat"></i>
                         </div>
                     </div>
