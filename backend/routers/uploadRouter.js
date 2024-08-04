@@ -1,7 +1,9 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import songController from '../controllers/songController.js';
 import multer from 'multer';
+
 
 const router = express.Router();
 const upload = multer();
@@ -25,10 +27,6 @@ const fields = [
     { name: "songFile", maxCount: 1 },
     { name: "imgFile", maxCount: 1 },
 ];
-router.post('/', upload.fields(fields), (req, res) => {
-    console.log(req.files);
-    console.log(req.body);
-    res.json({ message: "Files uploaded successfully!" });
-});
+router.post('/', upload.fields(fields), (req, res) => {songController.createSong(req, res)});
 
 export default router;

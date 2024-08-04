@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import userHandler from '../controllers/userController.js';
+import userController from '../controllers/userController.js';
 
 const router = express.Router();
 
@@ -18,8 +18,8 @@ router.get('/', (req, res) => {
     }
 });
 
-router.post("/signin", userHandler.signIn);
+router.post("/signin", userController.signIn);
 
-router.post("/signup", userHandler.signUp);
+router.post("/signup", userController.signUp);
 
 export default router;

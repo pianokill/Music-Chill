@@ -3,7 +3,7 @@ import passport from "../utils/passport.js";
 import bcrypt from "bcrypt";
 const saltRounds = 10;
 
-class userHandler {
+class userController {
   signIn = passport.authenticate("local", {
     failureRedirect: "/login",
     successRedirect: "/",
@@ -35,4 +35,4 @@ class userHandler {
 
 }
 
-export default new userHandler();
+export default new userController();

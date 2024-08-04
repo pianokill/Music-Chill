@@ -1,11 +1,12 @@
 import loginRouter from './routers/loginRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
+import songRouter from './routers/songRouter.js';
+import passport from "./utils/passport.js";
 import express from 'express';
-import path from 'path';
 import session from 'express-session';
-import passport from 'passport';
-import { fileURLToPath } from 'url';
 import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
 
@@ -22,11 +23,10 @@ app.use(express.json());
 
 // Parse incoming URL-encoded data
 app.use(express.urlencoded({ extended: true }));
-
 // Initialize session
 app.use(
     session({
-      secret: 'HHSKK',
+      secret: process.env.SESSION_SECRET,
       saveUninitialized: false,
       resave: false,
       cookie: {
@@ -58,16 +58,6 @@ app.get('/', (req, res) => {
 });
 
 // API route to get song data
-app.get('/api/songs', (req, res) => {
-    res.json(songData);
-});
-
-const songData = [
-    {id: 1, name: "Magnetic", artist: "ILLIT", },
-    {id: 2, name: "Simp Gái 808", artist: "Low G"},
-    {id: 3, name: "Đừng làm trái tim anh đau", artist: "Sơn Tùng M-TP"},
-    {id: 4, name: "Mascara", artist: "Chillies"},
-    {id: 5, name: "Đâu Ai Dám Hứa", artist: "Czee"},
-];
+app.use('/api/songs', songRouter);
 
 export default app;

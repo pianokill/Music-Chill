@@ -4,44 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Upload MP3</title>
+  <link rel="stylesheet" href="./styles/upload.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <form id="form" >
-        <p>Click here to choose your MP3 file</p>
-        <input type="file" id="songInput" name="songFile" accept=".mp3" required />
-
-        <p>Click here to choose your music thumbnail</p>
-        <input type="file" id="imgInput" name="imgFile" accept=".jpg" required />
-
-        <p>Enter the name of the song</p>
-        <input type="text" id="songName" name="songName" oninput="checkSongNameLength()" required />
-        <span id="charCount"></span>
-
-        <p>Enter the release date of the song</p>
-        <input type="date" id="releaseDate" name="releaseDate" oninput="checkReleaseDate()" required />
-        <span id="dateValidation"></span>
-
-        <p>Select song categories</p>
-        <input type="checkbox" id="categoryPop" name="categories" value="Pop">
-        <label for="categoryPop">Pop</label><br>
-        <input type="checkbox" id="categoryRock" name="categories" value="Rock">
-        <label for="categoryRock">Rock</label><br>
-        <input type="checkbox" id="categoryHipHop" name="categories" value="Hip-Hop">
-        <label for="categoryHipHop">Hip-Hop</label><br>
-        <input type="checkbox" id="categoryJazz" name="categories" value="Jazz">
-        <label for="categoryJazz">Jazz</label><br>
-        <input type="checkbox" id="categoryElectronic" name="categories" value="Electronic">
-        <label for="categoryElectronic">Electronic</label><br>
-        <input type="checkbox" id="categoryClassical" name="categories" value="Classical">
-        <label for="categoryClassical">Classical</label><br>
-
-        <input id="submit" type="submit" value="Upload">
-    </form>
-    <div id="status">
-        <!-- Server response will be displayed here -->
-        <p id="message"></p>
-    </div>
-    <script src="./js/upload.js"></script>
+    <div class="form-container">
+        <form id="form">
+          <h1>Upload to Music&Chill</h1>
+          <p>Choose your MP3 file</p>
+          <input type="file" id="songInput" name="songFile" accept=".mp3" required />
+          <p>Choose your music thumbnail</p>
+          <input type="file" id="imgInput" name="imgFile" accept=".jpg" required />
+          <p>Enter the name of the song</p>
+          <input type="text" id="songName" name="songName" oninput="checkSongNameLength()" required />
+          <span id="charCount"></span>
+          <p>Enter the release date of the song</p>
+          <input type="date" id="releaseDate" name="releaseDate" oninput="checkReleaseDate()" required />
+          <span id="dateValidation"></span>
+          <p>Select song categories</p>
+          <div class="checkbox-container">
+            <input type="checkbox" id="categoryPop" name="categories" value="1">
+            <label for="categoryPop">Pop</label>
+            <input type="checkbox" id="categoryRnB" name="categories" value="2">
+            <label for="categoryRnB">RnB</label>
+            <input type="checkbox" id="categoryRap" name="categories" value="3">
+            <label for="categoryRap">Rap</label>
+            <input type="checkbox" id="categoryK-Pop" name="categories" value="4">
+            <label for="categoryK-Pop">K-Pop</label>
+            <input type="checkbox" id="categoryIndie" name="categories" value="5">
+            <label for="categoryIndie">Indie</label>
+            <input type="checkbox" id="categoryBallad" name="categories" value="6">
+            <label for="categoryBallad">Ballad</label>
+          </div>
+          <input id="submit" type="submit" value="Upload">
+        </form>
+        <div id="status">
+            <!-- Server response will be displayed here -->
+            <p id="message"></p>
+        </div>
+      </div>
+    <script type="module" src="./js/upload.js"></script>
 </body>
 </html>
