@@ -186,6 +186,8 @@ body{
 .right-sidebar{
   grid-area: right-sidebar;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .right-sidebar-nav{
   padding: 20px 20px;
