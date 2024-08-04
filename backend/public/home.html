@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Music&Chill</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <body>
+        <div class="app">
+            <!-- Left sidebar -->
+            <div class="left-sidebar">
+                <div class="left-sidebar-nav menu box">
+                    <ul class="left-sidebar-list">
+                        <li class="left-sidebar-item">
+                            <a href="" class="left-sidebar-item-link">
+                                <i class="left-sidebar-icon fa-solid fa-house"></i>
+                                Home
+                            </a>
+                        </li>
+                        <li class="left-sidebar-item">
+                            <a href="" class="left-sidebar-item-link">
+                                <i class="left-sidebar-icon fa-solid fa-magnifying-glass"></i>
+                                Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="left-sidebar-nav playlist box">
+                    <header class="playlist-header">
+                        <ul class="left-sidebar-list">
+                            <li class="left-sidebar-item">
+                                <a href="" class="left-sidebar-item-link">
+                                    <i class="left-sidebar-icon fa-solid fa-book"></i>
+                                    Your library
+                                </a>
+                            </li>
+                            <li class="left-sidebar-item">
+                                <a href="" class="left-sidebar-item-link">
+                                    <i class="left-sidebar-icon fa-solid fa-magnifying-glass"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </header>
+                    
+                    <div class="scroll-container">
+                        <ul class="music-list">
+                            <li class="music-items">
+                                <div class="item-img"></div>
+                                <div class="item-info">
+                                    <div class="item-name">Name</div>
+                                    <div class="item-artist">Item owner</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right sidebar -->
+            <div class="right-sidebar box">
+                <header class="right-sidebar-header">
+                    <div class="right-sidebar-nav">
+                        <div class="circle">
+                            <i class="header-icon fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                </header>
+                <div class="scroll-container">
+                    <ul class="music-list queue">
+                        <li class="music-items">
+                            <div class="item-img"></div>
+                            <div class="item-info">
+                                <div class="item-name">Name</div>
+                                <div class="item-owner">Item owner</div>
+                            </div>
+                        </li>
+                        <li class="music-items">
+                            <div class="item-img"></div>
+                            <div class="item-info">
+                                <div class="item-name">Name</div>
+                                <div class="item-owner">Item owner</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main container -->
+            <div class="box main">
+                <header class="main-header">
+                    <div class="main-nav">
+                        <div class="main-nav-left">
+                            <div class="circle">
+                                <i class="header-icon fa-solid fa-angle-left"></i>
+                            </div>
+                            <div class="circle">
+                                <i class="header-icon fa-solid fa-angle-right"></i>
+                            </div>
+                        </div>
+                        <div class="main-nav-right">
+                            <div class="circle">
+                                <i class="header-icon fa-solid fa-bell"></i>
+                            </div>
+                            <div class="circle">
+
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="main-player">
+                    <div class="song-img"></div>
+                    <div class="song-info">
+                        <div class="song-name">Song name</div>
+                        <div class="artist-name">Artist name</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="box playingbar">
+                <div class="playingbar-left"></div>
+                <div class="playingbar-main">
+                    <div class="control">
+                        <div class="btn shuffer">
+                            <i class="playingbar-icon fa-solid fa-shuffle"></i>
+                        </div>
+                        <div class="btn prev">
+                            <i class="playingbar-icon fa-solid fa-backward-step"></i>
+                        </div>
+                        <div class="btn play">
+                            <i class="playingbar-icon fa-solid fa-play"></i>
+                        </div>
+                        <div class="btn next">
+                            <i class="playingbar-icon fa-solid fa-forward-step"></i>
+                        </div>
+                        <div class="btn repeat">
+                            <i class="playingbar-icon fa-solid fa-repeat"></i>
+                        </div>
+                    </div>
+                    <div class="timer">
+                        <div class="time_start">00:00</div>
+                        <input type="range" name="range" id="progress" value="0">
+                        <div class="time_end">00:00</div>
+                    </div>
+                    
+                </div>
+                <div class="playingbar-right"></div>
+            </div>
+        </div>
+        <script type="module" src="js/main.js"></script>
+    </body>
+</html>

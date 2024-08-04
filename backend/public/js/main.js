@@ -2,7 +2,7 @@ import MusicPlayer from './musicPlayer.js';
 
 // Initialize the music player with the configuration object
 const player = new MusicPlayer({
-    apiUrl: '/api/songs',
+    apiUrl: '/api/songs/usersongs',
     buttonSelectors: {
         play: '.play',
         prev: '.prev',
