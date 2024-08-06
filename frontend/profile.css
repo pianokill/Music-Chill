@@ -169,3 +169,15 @@ label{
 input{
   display: None;
 }
+
+#bio-edit {
+  display: none; /* Initially hidden */
+  width: 100%; /* Set the width to match the container */
+  height: 50px; /* Set the height as desired */
+  padding: 10px; /* Add padding for better text spacing */
+  font-size: 16px; /* Adjust the font size for readability */
+  border: 1px solid #ccc; /* Add a border to match the style */
+  border-radius: 5px; /* Slight border radius for rounded corners */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  resize: vertical; /* Allow the user to resize vertically */
+}

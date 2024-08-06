@@ -20,7 +20,8 @@
 
     <section class="bio">
       <h2>Bio</h2>
-      <p>Software Developer. Passionate about open-source projects and web development.</p>
+      <p id="bio-text">Software Developer. Passionate about open-source projects and web development.</p>
+      <textarea id="bio-edit" style="display: none;"></textarea>
     </section>
 
     <section class="stats">
@@ -58,14 +59,41 @@
     </div>
 
     <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
+      <a href="#">Profile</a>
+      <a href="#">Setting</a>
+      <a href="#">Statistic</a>
+      <a href="#">Upload</a>
     </div>
 
   </div>
 
   <script>
+
+    function editBio(){
+      bioEdit = document.getElementById('bio-edit');
+      bioText = document.getElementById('bio-text');
+        // Switch to edit mode
+    if (bioEdit.style.display === 'none') {
+      bioEdit.value = bioText.innerText; // Set the textarea's value to the current bio text
+      bioText.style.display = 'none';
+      bioEdit.style.display = 'block';
+      bioEdit.focus(); // Focus the textarea for immediate editing
+    } 
+    else {
+      // Switch to view mode
+      bioText.innerText = bioEdit.value; // Update the bio text with the textarea's value
+      bioText.style.display = 'block';
+      bioEdit.style.display = 'none';
+    }
+  }
+
+  function saveEdit(event){
+    const bioEdit = document.getElementById('bio-edit');
+  
+    if (event.type === 'blur' || (event.type === 'keydown' && event.key === 'Enter')) {
+      editBio();
+    }
+  }
 
     function insertPicture(x){
       let profilePicture = document.getElementById("profileID")
@@ -96,6 +124,16 @@
         }
       }
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const bioText = document.getElementById('bio-text');
+      const bioEdit = document.getElementById('bio-edit');
+
+      bioText.addEventListener('click', editBio); // Click on bio text to edit
+      bioEdit.addEventListener('blur', saveEdit); // Save on blur
+      bioEdit.addEventListener('keydown', saveEdit); // Save on Enter key press
+    });
+
   </script>
 </body>
 </html>
