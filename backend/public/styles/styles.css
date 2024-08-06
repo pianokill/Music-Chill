@@ -150,6 +150,11 @@ body{
   align-items: center;
 }
 
+a .circle:hover{
+  height: 32px;
+  width: 32px;
+}
+
 .header-icon{
   font-size: 20px;
   color: var(--white-color);
@@ -260,3 +265,4 @@ body{
   font-size: 13px;
   justify-content: space-around;
 }  
+

@@ -31,7 +31,7 @@ app.use(
       resave: false,
       cookie: {
         secure: false,
-        maxAge: 1000 * 60 * 60 * 24
+        maxAge: 1000 * 60
       },
     })
   );
@@ -56,6 +56,7 @@ app.get('/', (req, res) => {
         res.redirect('/login');
     }
 });
+
 
 // API route to get song data
 app.use('/api/songs', songRouter);

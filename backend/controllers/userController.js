@@ -33,6 +33,11 @@ class userController {
     }
   };
 
+logout = async (req, res, next) => {
+    res.clearCookie('connect.sid');
+    res.redirect('/');
+};
+
 }
 
 export default new userController();
