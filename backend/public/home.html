@@ -24,8 +24,8 @@
                         </li>
                         <li class="left-sidebar-item">
                             <a href="" class="left-sidebar-item-link">
-                                <i class="left-sidebar-icon fa-solid fa-magnifying-glass"></i>
-                                Search
+                                <i class="left-sidebar-icon fa-solid fa-user"></i>
+                                Profile
                             </a>
                         </li>
                     </ul>
@@ -37,11 +37,6 @@
                                 <a href="" class="left-sidebar-item-link">
                                     <i class="left-sidebar-icon fa-solid fa-book"></i>
                                     Your library
-                                </a>
-                            </li>
-                            <li class="left-sidebar-item">
-                                <a href="" class="left-sidebar-item-link">
-                                    <i class="left-sidebar-icon fa-solid fa-magnifying-glass"></i>
                                 </a>
                             </li>
                         </ul>
@@ -65,9 +60,7 @@
             <div class="right-sidebar box">
                 <header class="right-sidebar-header">
                     <div class="right-sidebar-nav">
-                        <div class="circle">
-                            <i class="header-icon fa-solid fa-xmark"></i>
-                        </div>
+                        <span style="font-size: 24px;">Next songs</span>
                     </div>
                 </header>
                 <div class="scroll-container">
@@ -94,36 +87,32 @@
             <div class="box main">
                 <header class="main-header">
                     <div class="main-nav">
-                        <div class="main-nav-left">
-                            <div class="circle">
-                                <i class="header-icon fa-solid fa-angle-left"></i>
-                            </div>
-                            <div class="circle">
-                                <i class="header-icon fa-solid fa-angle-right"></i>
-                            </div>
+                        <div class="search-bar">
+                            <i class="header-icon fa-solid fa-magnifying-glass"></i>
+                            <input type="text" class="search-box" placeholder="Search...">
                         </div>
-                        <div class="main-nav-right">
-                            <div class="circle">
-                                <i class="header-icon fa-solid fa-bell"></i>
-                            </div>
-                            <div class="circle">
-
-                            </div>
+                        <div class="circle cancel hide">
+                            <i class="header-icon fa-solid fa-xmark"></i>
                         </div>
                     </div>
                 </header>
-
-                <div class="main-player">
-                    <div class="song-img"></div>
-                    <div class="song-info">
-                        <div class="song-name">Song name</div>
-                        <div class="artist-name">Artist name</div>
-                    </div>
+                <div class="scroll-container">
+                    <div class="home">this is home page</div>
+                    <ul class="music-list search-result hide">
+                    </ul>
                 </div>
             </div>
             <!-- Footer -->
-            <div class="box playingbar">
-                <div class="playingbar-left"></div>
+            <div class="playingbar">
+                <div class="playingbar-left">
+                    <div class="player">
+                        <div class="song-img"></div>
+                        <div class="song-info">
+                            <div class="song-name">Song name</div>
+                            <div class="artist-name">Artist name</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="playingbar-main">
                     <div class="control">
                         <div class="btn shuffer">
@@ -147,9 +136,13 @@
                         <input type="range" name="range" id="progress" value="0">
                         <div class="time_end">00:00</div>
                     </div>
-                    
                 </div>
-                <div class="playingbar-right"></div>
+                <div class="playingbar-right">
+                    <div class="volume">
+                        <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+                        <input type="range" id="vol" value="100">
+                    </div>
+                </div>
             </div>
         </div>
         <script type="module" src="js/main.js"></script>

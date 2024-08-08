@@ -1,6 +1,7 @@
 :root{
   --white-color: #fff;
   --black-color: #000;
+  --gray-color: #1c1c1c;
 }
 
 *{
@@ -37,7 +38,7 @@ body{
 /* box */
 .box{
   background-color: #1c1c1c;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 /* scroll container for: playlist, home, search, ... */
 .scroll-container{
@@ -101,6 +102,7 @@ body{
   align-items: center;
   padding: 8px 8px;
   gap: 8px;
+  cursor: pointer;
 }
 
 .music-items:hover{
@@ -130,7 +132,8 @@ body{
 .main-nav{
   padding: 20px 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-nav-left, 
@@ -138,6 +141,7 @@ body{
   gap: 8px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .circle{
@@ -148,39 +152,38 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 .header-icon{
   font-size: 20px;
   color: var(--white-color);
 }
-/* Main container */
-/* For music player */
-.main-player{
-  flex: 1;
+
+.search-bar{
+  width: max-content;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
+  padding: 14px;
+  border-radius: 28px;
+  background-color: var(--black-color);
 }
 
-.main-player .song-img{
-  width: 50%;
-  padding-bottom: 50%;
-  background-image: url('https://github.com/fantastichaha11/storage/blob/main/image/1.jpg?raw=true');
-  background-size: cover;
-  border-radius: 5%;
+.search-bar .header-icon{
+  font-size: 12px;
+  padding-right: 14px;
 }
 
-.main-player .song-info{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.search-bar .search-box{
+  min-width: 300px;
+  /* font-size: 14px; */
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: var(--white-color);
 }
 
-.main-player .song-info .song-name{
-  font-size: 24px;
-}
 
 /* Right side */
 .right-sidebar{
@@ -197,7 +200,7 @@ body{
 /* Playing music bar (footer) */
 .playingbar{
   grid-area: playingbar;
-  height: 100px;
+  height: 72px;
   display: flex;
 }
 
@@ -211,7 +214,6 @@ body{
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding: 10px;
 }
 
 .playingbar-left,
@@ -219,24 +221,26 @@ body{
   flex: 3;
 }
 
-.playingbar-main #progress{
+.playingbar input{
   -webkit-appearance: none;
   width: 70%;
   height: 5px;
-  background: #39aae2;
+  background: var(--gray-color);
   opacity: 0.5;
   cursor: pointer;
   position: relative;
   border-radius: 10px;
+  overflow: hidden;
 }
 
-#progress::-webkit-slider-thumb{
+.playingbar input::-webkit-slider-thumb{
   -webkit-appearance: none;
   appearance: none;
-  background: #0d1825;
-  width: 10px;
-  height: 10px;
+  background: var(--white-color);
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
+  box-shadow: -400px 0 0 400px #39aae2;
 }
 
 .playingbar-main .control{
@@ -260,3 +264,54 @@ body{
   font-size: 13px;
   justify-content: space-around;
 }  
+
+/* Left footer */
+/* For music player */
+.playingbar-left{
+  display: flex;
+  align-items: center;
+}
+
+.player{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.player .song-img{
+  width: 60px;
+  height: 60px;
+  background-image: url('https://github.com/fantastichaha11/storage/blob/main/image/1.jpg?raw=true');
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.player .song-info{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.player .song-info .song-name{
+  font-size: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+.playingbar-right{
+  display: flex;
+  justify-content: center;
+}
+
+.volume{
+  display: flex;
+  align-items: center;
+}
+
+.volume #volume-icon{
+  font-size: 16px;
+  margin-right: 5px;
+}

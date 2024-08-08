@@ -23,6 +23,14 @@ export default class MusicPlayer {
         this.timeEnd = document.querySelector(config.timeSelectors.end);
         this.timeBar = document.querySelector(config.timeSelectors.bar);
 
+        this.searchBox = document.querySelector(config.mainSelectors.search);
+        this.cancelButton = document.querySelector(config.mainSelectors.cancel);
+        this.home = document.querySelector(config.mainSelectors.home);
+        this.result = document.querySelector(config.mainSelectors.result);
+
+        this.volBar = document.querySelector(config.volumeSelectors.bar);
+        this.queue = document.querySelector(config.queueSelectors.queue);
+
         this.#audio = new Audio();
         this.isPlaying = false;
         this.shuffer = false;   
@@ -36,6 +44,14 @@ export default class MusicPlayer {
         this.shuffButton.addEventListener('click',() => this.shufferMusic());
         this.#audio.addEventListener('ended', () => this.navigateSong(1));
         this.timeBar.addEventListener('change', () => this.changeTimeBar());
+
+
+        this.searchBox.addEventListener('focus', () => this.inSearch());
+        this.cancelButton.addEventListener('click', () => this.outSearch());
+        this.searchBox.addEventListener('keyup', (e) => this.updateSearch(e));
+        this.volBar.addEventListener('input', () => this.changeVolBar());
+        this.queue.addEventListener('click', (e) => this.changeSong(e));
+        this.result.addEventListener('click', (e) => this.changeSong(e));
     }
 
     // Initialize the music player
@@ -96,7 +112,7 @@ export default class MusicPlayer {
             `<div class="item-img" style="background-image: url(${imgUrl})"></div>
             <div class="item-info">
                 <div class="item-name">${this.#songData[i].name}</div>
-                <div class="item-onwer">${this.#songData[i].artist}</div>
+                <div class="item-owner">${this.#songData[i].artist}</div>
             </div>`;
             queueElement.appendChild(songQueueElement);
         }
@@ -210,5 +226,54 @@ export default class MusicPlayer {
         const temp = this.timeBar.value;
         this.#audio.currentTime = Math.floor(temp);
         this.displayTimer();
+    }
+
+    // Change the volume bar
+    changeVolBar(){
+        const temp = this.volBar.value;
+        this.#audio.volume = temp /100;
+    }
+
+    inSearch(){
+        this.home.classList.add('hide');
+        this.result.classList.remove('hide');
+        this.cancelButton.classList.remove('hide');
+    }
+
+    outSearch(){
+        this.home.classList.remove('hide');
+        this.result.classList.add('hide');
+        this.cancelButton.classList.add('hide');
+        this.searchBox.value = '';
+    }
+
+    updateSearch(e){
+        let searchData = e.target.value.toLowerCase();
+        this.result.innerHTML = '';
+        if (searchData.length > 0){
+            const filterData = this.#songData.filter((song) => song.name.toLowerCase().includes(searchData));
+            for (var i = 0;i < filterData.length;i++){
+                let imgUrl = `${HOST_URL_IMG}${filterData[i].id}.jpg?raw=true`;
+                console.log(imgUrl);
+                let resultElement = document.createElement('li');
+                resultElement.classList.add('music-items');
+                resultElement.innerHTML = 
+                `<div class="item-img" style="background-image: url(${imgUrl})"></div>
+                <div class="item-info">
+                    <div class="item-name">${filterData[i].name}</div>
+                    <div class="item-owner">${filterData[i].artist}</div>
+                </div>`;
+                this.result.appendChild(resultElement);
+            }
+        }
+    }
+    
+    changeSong(e){
+        let temp = e.target;
+        let song = temp.closest('li');
+        let name = song.querySelector('.item-name').innerHTML;
+        let artist = song.querySelector('.item-owner').innerHTML;
+        let i = this.#songData.findIndex(s => {return s.name === name && s.artist === artist});
+        this.navigateSong(i - this.currentSongIndex);
     }
 }

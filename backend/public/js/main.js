@@ -19,6 +19,18 @@ const player = new MusicPlayer({
         name: '.song-name',
         artist: '.artist-name',
         image: '.song-img'
+    },
+    mainSelectors: {
+        search: '.search-box',
+        cancel: '.cancel',
+        home: '.home',
+        result: '.search-result',
+    },
+    queueSelectors: {
+        queue: 'ul.queue'
+    },
+    volumeSelectors: {
+        bar: '#vol',
     }
 });
 
