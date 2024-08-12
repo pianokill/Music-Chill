@@ -8,7 +8,9 @@ const player = new MusicPlayer({
         prev: '.prev',
         next: '.next',
         shuff: '.shuffer',
-        repeat: '.repeat'
+        repeat: '.repeat',
+        add: '.add',
+        like: '.like'
     },
     timeSelectors: {
         start: '.time_start',
@@ -22,7 +24,7 @@ const player = new MusicPlayer({
     },
     mainSelectors: {
         search: '.search-box',
-        cancel: '.cancel',
+        cancel: '.main-nav .cancel',
         home: '.home',
         result: '.search-result',
     },
@@ -31,6 +33,10 @@ const player = new MusicPlayer({
     },
     volumeSelectors: {
         bar: '#vol',
+    },
+    popupSelectors:{
+        popup: '.popup',
+        closePopup: '.popup .cancel',
     }
 });
 

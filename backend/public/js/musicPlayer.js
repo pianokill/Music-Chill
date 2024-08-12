@@ -14,6 +14,8 @@ export default class MusicPlayer {
         this.prevButton = document.querySelector(config.buttonSelectors.prev);
         this.nextButton = document.querySelector(config.buttonSelectors.next);
         this.shuffButton = document.querySelector(config.buttonSelectors.shuff);
+        this.likeButton = document.querySelector(config.buttonSelectors.like);
+        this.addButton = document.querySelector(config.buttonSelectors.add);
 
         this.songNameElement = document.querySelector(config.songInfoSelectors.name);
         this.artistElement = document.querySelector(config.songInfoSelectors.artist);
@@ -30,6 +32,9 @@ export default class MusicPlayer {
 
         this.volBar = document.querySelector(config.volumeSelectors.bar);
         this.queue = document.querySelector(config.queueSelectors.queue);
+
+        this.popup = document.querySelector(config.popupSelectors.popup);
+        this.closePopup = document.querySelector(config.popupSelectors.closePopup);
 
         this.#audio = new Audio();
         this.isPlaying = false;
@@ -52,6 +57,9 @@ export default class MusicPlayer {
         this.volBar.addEventListener('input', () => this.changeVolBar());
         this.queue.addEventListener('click', (e) => this.changeSong(e));
         this.result.addEventListener('click', (e) => this.changeSong(e));
+
+        this.addButton.addEventListener('click', () => this.togglePopup());
+        this.closePopup.addEventListener('click', () => this.togglePopup());
     }
 
     // Initialize the music player
@@ -275,5 +283,9 @@ export default class MusicPlayer {
         let artist = song.querySelector('.item-owner').innerHTML;
         let i = this.#songData.findIndex(s => {return s.name === name && s.artist === artist});
         this.navigateSong(i - this.currentSongIndex);
+    }
+
+    togglePopup(){
+        this.popup.classList.toggle('hide');
     }
 }
