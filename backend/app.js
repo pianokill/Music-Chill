@@ -1,6 +1,7 @@
 import loginRouter from './routers/loginRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
 import songRouter from './routers/songRouter.js';
+import historyRouter from './routers/historyRouter.js';
 import passport from "./utils/passport.js";
 import express from 'express';
 import session from 'express-session';
@@ -60,5 +61,5 @@ app.get('/', (req, res) => {
 
 // API route to get song data
 app.use('/api/songs', songRouter);
-
+app.use('/api/history', historyRouter)
 export default app;
