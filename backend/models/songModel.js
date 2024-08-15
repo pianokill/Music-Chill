@@ -1,5 +1,6 @@
 // songModel.js
 import pool from '../configs/dbConfig.js';
+import axios from 'axios';
 
 class songModel {
     async createSong(name, artistId, releaseDate) {
@@ -55,6 +56,16 @@ class songModel {
         } catch (error) {
             throw new Error(`Error getting all songs: ${error.message}`);
         }
+    }
+
+    async getSongsRecommendation(user_id) {
+        try {
+            const result = await axios.get(`http://localhost:8000/predict/${user_id}/10`);
+            console.log(result.data)
+            return result.data;
+        } catch (error) {
+                throw new Error(`Error getting recommendations ${error.message}`);;
+          }
     }
 };
 

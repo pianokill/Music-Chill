@@ -69,11 +69,45 @@ export default class MusicPlayer {
             if (this.#songData.length > 0) {
                 this.loadSong(this.currentSongIndex);
             }
+            await this.fetchMiddleSectionSongs(); // Fetch for the middle section
+
         } catch (error) {
             console.error("Failed to fetch songs:", error);
         }
     }
-
+    async fetchMiddleSectionSongs() {
+        const middleApiUrl = '/api/songs/recommendations'; // Replace with your new API endpoint
+        try {
+            const response = await fetch(middleApiUrl);
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            const middleSongs = await response.json();
+            this.displayMiddleSectionSongs(middleSongs);
+        } catch (error) {
+            console.error('Error fetching middle section songs:', error);
+            throw error;
+        }
+    }
+    
+    // Add this method to display the fetched songs in the middle section
+    displayMiddleSectionSongs(middleSongs) {
+        const middleSectionElement = document.querySelector('.home .music-list');
+        middleSectionElement.innerHTML = ''; // Clear existing content
+    
+        middleSongs.forEach(song => {
+            const imgUrl = `${HOST_URL_IMG}${song.id}.jpg?raw=true`;
+            const songElement = document.createElement('li');
+            songElement.classList.add('music-items');
+            songElement.innerHTML = `
+                <div class="item-img" style="background-image: url(${imgUrl})"></div>
+                <div class="item-info">
+                    <div class="item-name">${song.name}</div>
+                    <div class="item-artist">${song.artist}</div>
+                </div>`;
+            middleSectionElement.appendChild(songElement);
+        });
+    }
     // Fetch song data from the API
     async fetchSongData() {
         try {

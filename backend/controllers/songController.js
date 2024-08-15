@@ -66,7 +66,11 @@ class songController {
 
     async getSongs(req, res) {
         const songData = await songModel.getAllSongs();
-        console.log(songData);
+        res.json(songData);
+    }
+    async getRecommendations(req, res) {
+        const user_id = req.user.id
+        const songData = await songModel.getSongsRecommendation(user_id);
         res.json(songData);
     }
 }
