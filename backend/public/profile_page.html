@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | Music&Chill</title>
+  <link rel="stylesheet" href="/styles/profile.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="profile-header">
+      <img src="profile-image" id="profileID" alt="Insert here" class="profile-picture">
+      <label for="input-file"></label>
+      <input type="file" accept="image/*" id="input-file" onclick="insertPicture(this)">
+      <div class="profile-info">
+        <h1>John Doe</h1>
+        <p>@johndoe</p>
+      </div>
+      <a href="profile/logout"><button>Logout</button></a>
+    </header>
+
+    <section class="bio">
+      <h2>Bio</h2>
+      <p id="bio-text">Software Developer. Passionate about open-source projects and web development.</p>
+      <textarea id="bio-edit" style="display: none;"></textarea>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <h3>Your posts</h3>
+        <p>42</p>
+      </div>
+      <div class="stat">
+        <h3>Followers</h3>
+        <p>1000</p>
+      </div>
+      <div class="stat">
+        <h3>Following</h3>
+        <p>50</p>
+      </div>
+    </section>
+
+    <section class="posts">
+      <h2>Posts</h2>
+      <div class="post">
+        <h3>Project-1</h3>
+        <p>Repository description here...</p>
+      </div>
+      <div class="post">
+        <h3>Project-2</h3>
+        <p>Repository description here...</p>
+      </div>
+      <!-- Add more repositories as needed -->
+    </section>
+
+    <div class="menubtn" onclick="menuFunction(this)">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+
+    <div class="dropdown-content">
+      <a href="#">Profile</a>
+      <a href="#">Setting</a>
+      <a href="#">Statistic</a>
+      <a href="#">Upload</a>
+    </div>
+
+  </div>
+
+  <script>
+
+    function editBio(){
+      bioEdit = document.getElementById('bio-edit');
+      bioText = document.getElementById('bio-text');
+        // Switch to edit mode
+    if (bioEdit.style.display === 'none') {
+      bioEdit.value = bioText.innerText; // Set the textarea's value to the current bio text
+      bioText.style.display = 'none';
+      bioEdit.style.display = 'block';
+      bioEdit.focus(); // Focus the textarea for immediate editing
+    } 
+    else {
+      // Switch to view mode
+      bioText.innerText = bioEdit.value; // Update the bio text with the textarea's value
+      bioText.style.display = 'block';
+      bioEdit.style.display = 'none';
+    }
+  }
+
+  function saveEdit(event){
+    const bioEdit = document.getElementById('bio-edit');
+  
+    if (event.type === 'blur' || (event.type === 'keydown' && event.key === 'Enter')) {
+      editBio();
+    }
+  }
+
+    function insertPicture(x){
+      let profilePicture = document.getElementById("profileID")
+      let inputFile = document.getElementById("input-file")
+
+      inputFile.onchange = function(){
+        profilePicture.src = URL.createObjectURL(inputFile.files[0])
+      }
+    }
+
+    function menuFunction(x) 
+    {
+      x.classList.toggle("change");
+      var dropdown = document.querySelector(".dropdown-content");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    window.onclick = function(event) 
+    {
+      if (!event.target.matches('.menubtn, .menubtn *')) {
+        var dropdown = document.querySelector(".dropdown-content");
+        if (dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        }
+        var bars = document.querySelector('.menubtn');
+        if (bars.classList.contains('change')) {
+            bars.classList.remove('change');
+        }
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const bioText = document.getElementById('bio-text');
+      const bioEdit = document.getElementById('bio-edit');
+
+      bioText.addEventListener('click', editBio); // Click on bio text to edit
+      bioEdit.addEventListener('blur', saveEdit); // Save on blur
+      bioEdit.addEventListener('keydown', saveEdit); // Save on Enter key press
+    });
+
+  </script>
+</body>
+</html>

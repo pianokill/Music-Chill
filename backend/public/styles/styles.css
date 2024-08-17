@@ -162,6 +162,11 @@ body{
   cursor: pointer;
 }
 
+a .circle:hover{
+  height: 32px;
+  width: 32px;
+}
+
 .header-icon{
   font-size: 20px;
   color: var(--white-color);

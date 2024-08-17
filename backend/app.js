@@ -31,7 +31,7 @@ app.use(
       resave: false,
       cookie: {
         secure: false,
-        maxAge: 1000 * 60 * 60 * 24
+        maxAge: 1000 * 60 * 60
       },
     })
   );
@@ -50,12 +50,13 @@ app.use("/upload", uploadRouter);
 
 // Send the main HTML file on the root route
 app.get('/', (req, res) => {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated("local-login")) {
         res.sendFile(path.join(__dirname, 'public', 'home.html'));
     } else {
         res.redirect('/login');
     }
 });
+
 
 // API route to get song data
 app.use('/api/songs', songRouter);

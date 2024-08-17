@@ -18,12 +18,13 @@ passport.deserializeUser(async (id, done) => {
 
 
 //xac thuc dang nhap
-passport.use(
+passport.use("local-login",
   new LocalStrategy(
     {
       usernameField: "email",
     },
     async (email, password, done) => {
+      console.log("local-login")
       try {
         const user = await userModel.findUserByEmail(email);
         if (!user) {
@@ -39,6 +40,7 @@ passport.use(
         return done(error);
       }
     })
-  );
+);
+
 
 export default passport;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="/styles/login.css">
     <title>Mussic&Chill | Sign In - Sign Up </title>
 </head>
 
@@ -26,7 +26,10 @@
                 <input type="password" placeholder="Password" class="sign-up-password" name="password" id="password-signup">
                 <input type="password" placeholder="Confirm password"  class="sign-up-password" name="password-cm" id="password-cm">
                 <input type="text" placeholder="Username" name="username" id="username-signup">
-                <input type="checkbox" name="isArtist" id="isArtist"><label for="isArtist">Are you an artist?</label>
+                <div class="checkbox-container">
+                    <label for="isArtist">Are you an artist?</label>
+                    <input type="checkbox" name="isArtist" id="isArtist">
+                </div>
                 <button type="button" class="btnUp" id="btnUp">Sign Up</button>
             </form>
         </div>
@@ -44,7 +47,7 @@
                 <input type="text" placeholder="Email" name="email" id="username">
                 <input type="password" placeholder="Password" class="sign-in-password" name="password" id="password">
                 <span class="showpassword"><i class="fa-regular fa-eye-slash"></i></span>
-                <a href="#">Forget Your Password?</a>
+                <a href="/login/forgetPassword">Forget Your Password?</a>
                 <button type="submit" class="btnIn" id="btnIn">Sign In</button>
             </form>
         </div>

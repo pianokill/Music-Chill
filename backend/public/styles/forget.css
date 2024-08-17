@@ -96,13 +96,17 @@ body{
 }
 
 .sign-in{
-    left: 0;
+    left: 25%;
     width: 50%;
     z-index: 2;
 }
 
 .container.active .sign-in{
     transform: translateX(100%);
+}
+
+.form h1{
+    margin-bottom: 20px;
 }
 
 .sign-up{
@@ -211,19 +215,6 @@ body{
     transform: translateX(200%);
 }
 
-
-.showpassword{
-    position: absolute;
-    right: 15%;
-    top: 59%;
-    cursor: pointer;
-    color: #000;
-    transform: translate(-50%);
-    @media (max-width: 560px) {
-        position: relative;
-     }
-}
-
 .up-showpassword{
     position: absolute;
     right: 14%;
@@ -234,15 +225,4 @@ body{
     @media (max-width: 686px) {
         display: none;
      }
-}
-
-.checkbox-container {
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-.checkbox-container label{
-    font-size: 14px;
-    margin-right: 8px;
 }
