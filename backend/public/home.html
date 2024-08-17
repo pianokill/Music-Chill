@@ -24,8 +24,8 @@
                         </li>
                         <li class="left-sidebar-item">
                             <a href="" class="left-sidebar-item-link">
-                                <i class="left-sidebar-icon fa-solid fa-magnifying-glass"></i>
-                                Search
+                                <i class="left-sidebar-icon fa-solid fa-user"></i>
+                                Profile
                             </a>
                         </li>
                     </ul>
@@ -39,21 +39,23 @@
                                     Your library
                                 </a>
                             </li>
-                            <li class="left-sidebar-item">
-                                <a href="" class="left-sidebar-item-link">
-                                    <i class="left-sidebar-icon fa-solid fa-magnifying-glass"></i>
-                                </a>
-                            </li>
                         </ul>
                     </header>
                     
                     <div class="scroll-container">
                         <ul class="music-list">
                             <li class="music-items">
-                                <div class="item-img"></div>
+                                <div class="item-img" style="background-image: url('https://github.com/fantastichaha11/storage/blob/main/image/3.jpg?raw=true')"></div>
                                 <div class="item-info">
-                                    <div class="item-name">Name</div>
-                                    <div class="item-artist">Item owner</div>
+                                    <div class="item-name">Vpop</div>
+                                    <div class="item-artist">myPlaylist</div>
+                                </div>
+                            </li>
+                            <li class="music-items">
+                                <div class="item-img" style="background-image: url('https://github.com/fantastichaha11/storage/blob/main/image/1.jpg?raw=true')"></div>
+                                <div class="item-info">
+                                    <div class="item-name">Kpop</div>
+                                    <div class="item-artist">myPlaylist</div>
                                 </div>
                             </li>
                         </ul>
@@ -65,20 +67,11 @@
             <div class="right-sidebar box">
                 <header class="right-sidebar-header">
                     <div class="right-sidebar-nav">
-                        <div class="circle">
-                            <i class="header-icon fa-solid fa-xmark"></i>
-                        </div>
+                        <span style="font-size: 24px;">Next songs</span>
                     </div>
                 </header>
                 <div class="scroll-container">
                     <ul class="music-list queue">
-                        <li class="music-items">
-                            <div class="item-img"></div>
-                            <div class="item-info">
-                                <div class="item-name">Name</div>
-                                <div class="item-owner">Item owner</div>
-                            </div>
-                        </li>
                         <li class="music-items">
                             <div class="item-img"></div>
                             <div class="item-info">
@@ -94,37 +87,40 @@
             <div class="box main">
                 <header class="main-header">
                     <div class="main-nav">
-                        <div class="main-nav-left">
-                            <div class="circle">
-                                <i class="header-icon fa-solid fa-angle-left"></i>
-                            </div>
-                            <div class="circle">
-                                <i class="header-icon fa-solid fa-angle-right"></i>
-                            </div>
+                        <div class="search-bar">
+                            <i class="header-icon fa-solid fa-magnifying-glass"></i>
+                            <input type="text" class="search-box" placeholder="Search...">
                         </div>
-                        <div class="main-nav-right">
-                            <div class="circle">
-                                <i class="header-icon fa-solid fa-bell"></i>
-                            </div>
-                            <a href="/login/profile"><div class="circle">
-                            </div></a>
+                        <div class="circle cancel hide">
+                            <i class="header-icon fa-solid fa-xmark"></i>
                         </div>
                     </div>
                 </header>
-
-                <div class="main-player">
-                    <div class="song-img"></div>
-                    <div class="song-info">
-                        <div class="song-name">Song name</div>
-                        <div class="artist-name">Artist name</div>
+                <div class="scroll-container">
+                    <div class="home">
+                        <ul class="music-list">
+                        </ul>
                     </div>
+                    <ul class="music-list search-result hide">
+                    </ul>
                 </div>
             </div>
             <!-- Footer -->
-            <div class="box playingbar">
-                <div class="playingbar-left"></div>
+            <div class="playingbar">
+                <div class="playingbar-left">
+                    <div class="player">
+                        <div class="song-img"></div>
+                        <div class="song-info">
+                            <div class="song-name">Song name</div>
+                            <div class="artist-name">Artist name</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="playingbar-main">
                     <div class="control">
+                        <div class="btn like">
+                            <i class="playingbar-icon fa-solid fa-heart"></i>
+                        </div>
                         <div class="btn shuffer">
                             <i class="playingbar-icon fa-solid fa-shuffle"></i>
                         </div>
@@ -140,15 +136,72 @@
                         <div class="btn repeat">
                             <i class="playingbar-icon fa-solid fa-repeat"></i>
                         </div>
+                        <div class="btn add">
+                            <i class="playingbar-icon fa-solid fa-circle-plus"></i>
+                        </div>
                     </div>
                     <div class="timer">
                         <div class="time_start">00:00</div>
                         <input type="range" name="range" id="progress" value="0">
                         <div class="time_end">00:00</div>
                     </div>
-                    
                 </div>
-                <div class="playingbar-right"></div>
+                <div class="playingbar-right">
+                    <div class="volume">
+                        <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+                        <input type="range" id="vol" value="100">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup hide">
+            <div class="overlay"></div>
+            <div class="addPlaylist">
+                <div class="header-popup">
+                    <div class="title">Your Playlist</div>
+                    <div class="circle cancel">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+                <div class="create-playlist">
+                    <div class="square">
+                        <i class="plus fa-solid fa-plus"></i>
+                    </div>
+                    <div class="title">Create a new playlist</div>
+                </div>
+                <div class="scroll-container">
+                    <ul class="music-list">
+                        <li class="music-items">
+                            <div class="item-img"></div>
+                            <div class="item-info">
+                                <div class="item-name">Name</div>
+                                <div class="item-owner">Item owner</div>
+                            </div>
+                        </li>
+                        <li class="music-items">
+                            <div class="item-img"></div>
+                            <div class="item-info">
+                                <div class="item-name">Name</div>
+                                <div class="item-owner">Item owner</div>
+                            </div>
+                        </li>
+                        <li class="music-items">
+                            <div class="item-img"></div>
+                            <div class="item-info">
+                                <div class="item-name">Name</div>
+                                <div class="item-owner">Item owner</div>
+                            </div>
+                        </li>
+                        <li class="music-items">
+                            <div class="item-img"></div>
+                            <div class="item-info">
+                                <div class="item-name">Name</div>
+                                <div class="item-owner">Item owner</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <script type="module" src="js/main.js"></script>
