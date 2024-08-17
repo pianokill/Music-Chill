@@ -20,11 +20,29 @@ router.get('/', (req, res) => {
     }
 });
 
+//truy cap proflie page
+router.get('/profile', (req, res) => {
+    if (req.isAuthenticated("local-login")){
+        res.sendFile(path.join(__dirname, '../public', 'profile_page.html'));
+    } else {
+        // console.log(req.session);
+        res.redirect('/');
+    }
+  });
+router.get('/profile/statistics', (req, res) => {
+    if (req.isAuthenticated("local-login")){
+        res.sendFile(path.join(__dirname, '../public', 'profile_statistics.html'));
+    } else {
+        // console.log(req.session);
+        res.redirect('/');
+    }
+  });
+
 router.post("/signin", userController.signIn);
 
 router.post("/signup", userController.signUp);
 
-router.get("/logout", userController.logout);
+router.get("/profile/logout", userController.logout);
 
 //forget passsword
 router.use("/forgetPassword", forgetRouter);

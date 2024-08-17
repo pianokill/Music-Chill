@@ -1,6 +1,8 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #28282B;
+    margin: 0;
+    padding: 0;
     /* width: 100%; */
 }
   
@@ -35,6 +37,53 @@ body {
   color: #F9F6EE;
 }
 
+  .button-style {
+    background-color: #f9f9f9;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    border: none;
+    border-radius: 0; /* Match the border-radius of dropdown items */
+    width: 100%; /* Make sure it aligns with the dropdown width */
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+    cursor: pointer;
+  }
+  
+  .button-style:hover {
+    background-color: #f1f1f1; /* Match hover effect of dropdown items */
+  }
+
+/*for artist*/
+.statistic {
+  background-color: #28282B;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+  color: #f1f1f1;
+  display: flex;
+  flex-direction: column; /* Căn dọc các phần tử bên trong */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  text-align: center; /* Căn giữa văn bản */
+}
+
+
+
+.statistic-chart {
+  width: 100%; /* Đặt kích thước tùy ý hoặc cố định */
+  max-width: 1000px; /* Giới hạn chiều rộng tối đa */
+  background-color: #A9A9A9;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+}
+
+canvas {
+  max-width: 100%;
+}
 .profile-info p {
   color: #FAF9F6;
   margin: 5px 0 0 0;
