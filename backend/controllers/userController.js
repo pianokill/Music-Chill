@@ -12,7 +12,7 @@ const otpStore = {};
 
 class userController {
   signIn = passport.authenticate("local-login", {
-    failureRedirect: "/login",
+    failureRedirect: "/auth",
     successRedirect: "/",
   });
 

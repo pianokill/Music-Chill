@@ -59,7 +59,7 @@ btnUp.addEventListener("click", async () => {
   }
   else {
     try {
-      let res = await fetch("/login/signUp", {
+      let res = await fetch("/auth/signUp", {
         method: "POST",
         body: data
       })
@@ -68,7 +68,7 @@ btnUp.addEventListener("click", async () => {
         alert(res.message);
       } else {
         alert(res.message);
-        window.location.href = '/login';
+        window.location.href = '/auth';
       }
     } catch (error) {
       console.log(error);

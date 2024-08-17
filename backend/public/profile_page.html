@@ -12,7 +12,7 @@
 <body>
   <div class="container">
     <header class="profile-header">
-      <img id="profileID" alt="Insert here" class="profile-picture">
+      <img id="profileID" alt="avatar" class="profile-picture" src="/images/profile-picture.png">
       <label for="input-file"></label>
       <input type="file" accept="image/*" id="input-file" onclick="insertPicture(this)">
       <div class="profile-info">
@@ -32,7 +32,7 @@
     </header>
 
     <section class="nav-bar">
-      <a href="#" class="nav-item"><i class="fas fa-home"></i> Home</a>
+      <a href="/" class="nav-item"><i class="fas fa-home"></i> Home</a>
       <a href="#" class="nav-item"><i class="fas fa-search"></i> Search</a>
       <a href="#" class="nav-item"><i class="fas fa-book"></i> Library</a>    
     </section>
@@ -60,9 +60,9 @@
     <div class="dropdown-content">
       <a href="#"><button class="button-style">Profile</button></a>
       <a href="#"><button class="button-style">Setting</button></a>
-      <a href="#"><button class="button-style">Statistics</button></a>
+      <a href="/profile/statistics"><button class="button-style">Statistics</button></a>
       <a href="#"><button class="button-style">Upload</button></a>
-      <a href="profile/logout"><button class="button-style">Logout</button></a>
+      <a href="/auth/logout"><button class="button-style">Logout</button></a>
     </div>
 
   </div>

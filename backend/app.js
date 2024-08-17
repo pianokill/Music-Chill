@@ -1,7 +1,8 @@
-import loginRouter from './routers/loginRouter.js';
+import authRouter from './routers/authRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
 import songRouter from './routers/songRouter.js';
 import historyRouter from './routers/historyRouter.js';
+import profileRouter from './routers/profileRouter.js';
 import passport from "./utils/passport.js";
 import express from 'express';
 import session from 'express-session';
@@ -15,6 +16,13 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+app.use((req, res, next) => {
+  if (req.path.endsWith('.html')) {
+    res.status(403).send('Access Denied');
+  } else {
+    next();
+  }
+});
 
 // Serve static files from the "public" directory
 app.use(express.static('public'));
@@ -41,25 +49,29 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Use the login router
+// Use the auth router
 const upload = multer();
-app.use('/login', upload.none());
-app.use("/login", loginRouter);
+app.use('/auth', upload.none());
+app.use("/auth", authRouter);
 
 // Use the upload router
 app.use("/upload", uploadRouter);
+
+// Use the profile router
+app.use("/profile", profileRouter);
+
+// API route to get song data
+app.use('/api/songs', songRouter);
+// API route to get history data
+app.use('/api/history', historyRouter)
 
 // Send the main HTML file on the root route
 app.get('/', (req, res) => {
     if (req.isAuthenticated("local-login")) {
         res.sendFile(path.join(__dirname, 'public', 'home.html'));
     } else {
-        res.redirect('/login');
+        res.redirect('/auth');
     }
 });
 
-
-// API route to get song data
-app.use('/api/songs', songRouter);
-app.use('/api/history', historyRouter)
 export default app;
