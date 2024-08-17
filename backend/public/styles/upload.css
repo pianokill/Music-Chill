@@ -1,0 +1,93 @@
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h1 {
+  text-align: center;
+}
+  
+  
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+form {
+  width: 100%;
+}
+
+input[type="file"], input[type="text"], input[type="date"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  color: white;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  background-color: #333;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 5px;
+  accent-color: lime;
+}
+
+.checkbox-container label {
+  margin-right: 20px; /* Adjust as needed for spacing */
+}
+
+input[type="submit"] {
+  background-color: #1DB954;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+input[type="submit"]:hover {
+  background-color: #1aa34a;
+}
+
+#charCount, #dateValidation {
+  display: block;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+@media (max-width: 800px) {
+  .form-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  form {
+    width: 100%;
+  }
+}

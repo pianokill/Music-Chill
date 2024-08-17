@@ -1,0 +1,183 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 200%;
+    height: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+    background-color: #28282B;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transform: translate(-50px, -50px);
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  img::before{
+    content: ' ';
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    background-image: url(../images/background.jpg);
+  }
+  
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .profile-info h1 {
+    margin: 0;
+    color: #F9F6EE;
+  }
+  
+  .profile-info p {
+    color: #FAF9F6;
+    margin: 5px 0 0 0;
+  }
+  
+  .bio, .stats, .posts .menubtn {
+    margin-bottom: 20px;
+  }
+  
+  .bio{
+    color: #F9F6EE;
+  }
+  
+  
+  .menubtn {
+    position: fixed; /* Changed from absolute to fixed */
+    top: 30px; /* Position it 30px from the top */
+    right: 30px; /* Position it 30px from the right */
+    display: inline-block;
+    cursor: pointer;
+    z-index: 2; /* Ensure it's above other content */
+  }
+  
+  .bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #F9F6EE;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  
+  .change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+  
+  .change .bar2 {
+    opacity: 0;
+  }
+  
+  .change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+  }
+  
+  .stats{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .stat {
+    text-align: center;
+  }
+  
+  .stat h3 {
+    margin: 0;
+    color: #F9F6EE;
+  }
+  
+  .stat p {
+    margin: 5px 0 0 0;
+    font-size: 1.2em;
+    color: #F9F6EE;
+  }
+  
+  .posts .post {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .posts h2{
+    color: #F9F6EE;
+  }
+  
+  .posts .post h3 {
+    margin: 0;
+  }
+  
+  .posts .post p {
+    margin: 5px 0 0 0;
+    color: #eee;
+  }
+  
+  
+  .dropdown-content {
+    display: none;
+    position: fixed; /* Changed from absolute to fixed */
+    top: 60px; /* Adjusted to be below the menu button */
+    right: 20px; /* Aligned with the menu button */
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2; /* Ensure it's above other content */
+    margin-top: 10px; /* Optional spacing */
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  label{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  
+  input{
+    display: None;
+  }
+  
+  #bio-edit {
+    display: none; /* Initially hidden */
+    width: 100%; /* Set the width to match the container */
+    height: 50px; /* Set the height as desired */
+    padding: 10px; /* Add padding for better text spacing */
+    font-size: 16px; /* Adjust the font size for readability */
+    border: 1px solid #ccc; /* Add a border to match the style */
+    border-radius: 5px; /* Slight border radius for rounded corners */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    resize: vertical; /* Allow the user to resize vertically */
+  }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload MP3</title>
+  <link rel="stylesheet" href="/styles/upload.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="form-container">
+        <form id="form">
+          <h1>Upload to Music&Chill</h1>
+          <p>Choose your MP3 file</p>
+          <input type="file" id="songInput" name="songFile" accept=".mp3" required />
+          <p>Choose your music thumbnail</p>
+          <input type="file" id="imgInput" name="imgFile" accept=".jpg" required />
+          <p>Enter the name of the song</p>
+          <input type="text" id="songName" name="songName" oninput="checkSongNameLength()" required />
+          <span id="charCount"></span>
+          <p>Enter the release date of the song</p>
+          <input type="date" id="releaseDate" name="releaseDate" oninput="checkReleaseDate()" required />
+          <span id="dateValidation"></span>
+          <p>Select song categories</p>
+          <div class="checkbox-container">
+            <input type="checkbox" id="categoryPop" name="categories" value="1">
+            <label for="categoryPop">Pop</label>
+            <input type="checkbox" id="categoryRnB" name="categories" value="2">
+            <label for="categoryRnB">RnB</label>
+            <input type="checkbox" id="categoryRap" name="categories" value="3">
+            <label for="categoryRap">Rap</label>
+            <input type="checkbox" id="categoryK-Pop" name="categories" value="4">
+            <label for="categoryK-Pop">K-Pop</label>
+            <input type="checkbox" id="categoryIndie" name="categories" value="5">
+            <label for="categoryIndie">Indie</label>
+            <input type="checkbox" id="categoryBallad" name="categories" value="6">
+            <label for="categoryBallad">Ballad</label>
+          </div>
+          <input id="submit" type="submit" value="Upload">
+        </form>
+        <div id="status">
+            <!-- Server response will be displayed here -->
+            <p id="message"></p>
+        </div>
+      </div>
+    <script type="module" src="./js/upload.js"></script>
+</body>
+</html>
