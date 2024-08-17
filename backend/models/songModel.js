@@ -1,5 +1,6 @@
 // songModel.js
 import pool from '../configs/dbConfig.js';
+import axios from 'axios';
 
 class songModel {
     async createSong(name, artistId, releaseDate) {

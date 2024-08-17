@@ -1,0 +1,7 @@
+numpy
+pandas
+scipy
+uvicorn
+psycopg[binary,pool]
+fastapi
+APScheduler

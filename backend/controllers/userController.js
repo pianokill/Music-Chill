@@ -88,7 +88,7 @@ class userController {
     }
   };
 
-  checkOTP = (req, res) => {
+  checkOTP = async (req, res) => {
     const token = req.headers.cookie.split("token=")[1];
     console.log("checkOTP")
     if (!token) {
@@ -100,12 +100,13 @@ class userController {
         const otpData = otpStore[email];
         //get from body
         const otp = req.body.OTP;
-        const password = req.body.password;
         if (otpData) {
           if (otpData.otp === otp && Date.now() < otpData.expiry) {
             // Xóa OTP sau khi xác thực thành công
             console.log("changepassword");
-            //thay pass ở đây
+            const hash = await bcrypt.hash(req.body.password, saltRounds);
+            await userModel.updateUserPassword(email,hash)
+            //Xóa bộ nhớ
             delete otpStore[email];
             res.clearCookie("token");
             return res.json({
