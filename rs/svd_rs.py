@@ -86,11 +86,11 @@ class SVD_RS(object):
 
         # Get the items that the user has already rated
         ids = np.where(self.Y_data[:, 0] == user_id)[0]
-        items_rated_by_u = self.Y_data[ids, 1].tolist()
+        # items_rated_by_u = self.Y_data[ids, 1].tolist()
         # Predict ratings for all items
         predicted_ratings = []
         for i in range(self.n_items):
-            if i not in items_rated_by_u:
+            # if i not in items_rated_by_u:
                 rating = self.pred(user_id, i)
                 predicted_ratings.append((i, rating))
 
