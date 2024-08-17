@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    background-color: #A9A9A9;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+canvas {
+    max-width: 100%;
+}

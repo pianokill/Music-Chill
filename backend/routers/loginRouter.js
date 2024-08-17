@@ -29,7 +29,14 @@ router.get('/profile', (req, res) => {
         res.redirect('/');
     }
   });
-
+router.get('/profile/statistics', (req, res) => {
+    if (req.isAuthenticated("local-login")){
+        res.sendFile(path.join(__dirname, '../public', 'profile_statistics.html'));
+    } else {
+        // console.log(req.session);
+        res.redirect('/');
+    }
+  });
 
 router.post("/signin", userController.signIn);
 
