@@ -5,7 +5,10 @@ const HOST_URL_IMG = "https://github.com/fantastichaha11/storage/blob/main/image
 export default class MusicPlayer {
     #audio;
     #songData = [];
+    #likedSongs = [];
+    #timeInSeconds = 0;
     #timerInterval;
+    #secondsInterval;
 
     constructor(config) {
         this.apiUrl = config.apiUrl;
@@ -43,6 +46,7 @@ export default class MusicPlayer {
         
 
         // Initialize Event Listeners
+        this.likeButton.addEventListener('click', () => this.toggleLike());
         this.playButton.addEventListener('click', () => this.togglePlayPause());
         this.prevButton.addEventListener('click', () => this.navigateSong(-1));
         this.nextButton.addEventListener('click', () => this.navigateSong(1));
@@ -66,6 +70,8 @@ export default class MusicPlayer {
     async init() {
         try {
             this.#songData = await this.fetchSongData();
+            const data = await this.fetchLikedSongs();
+            this.#likedSongs = data.map(song => song.id);
             if (this.#songData.length > 0) {
                 this.loadSong(this.currentSongIndex);
             }
@@ -75,6 +81,22 @@ export default class MusicPlayer {
             console.error("Failed to fetch songs:", error);
         }
     }
+
+    // Fetch liked songs from the API
+    async fetchLikedSongs() {
+        const likedSongsApiUrl = '/api/history/likedSongs';
+        try {
+            const response = await fetch(likedSongsApiUrl);
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching liked songs:', error);
+            throw error;
+        }
+    }
+
     async fetchMiddleSectionSongs() {
         const middleApiUrl = '/api/songs/recommendations'; // Replace with your new API endpoint
         try {
@@ -86,6 +108,20 @@ export default class MusicPlayer {
             this.displayMiddleSectionSongs(middleSongs);
         } catch (error) {
             console.error('Error fetching middle section songs:', error);
+            throw error;
+        }
+    }
+
+    // Fetch song data from the API
+    async fetchSongData() {
+        try {
+            const response = await fetch(this.apiUrl);
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching song data:', error);
             throw error;
         }
     }
@@ -108,19 +144,6 @@ export default class MusicPlayer {
             middleSectionElement.appendChild(songElement);
         });
     }
-    // Fetch song data from the API
-    async fetchSongData() {
-        try {
-            const response = await fetch(this.apiUrl);
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return await response.json();
-        } catch (error) {
-            console.error('Error fetching song data:', error);
-            throw error;
-        }
-    }
 
     // Load and play the song by index
     loadSong(index) {
@@ -132,6 +155,49 @@ export default class MusicPlayer {
         this.#audio.addEventListener('loadedmetadata', () => {
             this.displayTimer();
         });
+        if (this.#likedSongs.includes(song.id) && this.likeButton.classList.contains('btn-off')) {
+            console.log("a");
+            this.toggleOnOffButton(this.likeButton);
+        }
+        if (!(this.#likedSongs.includes(song.id)) && this.likeButton.classList.contains('btn-on')) {
+            console.log("b");
+            this.toggleOnOffButton(this.likeButton);
+        }
+    }
+    // Update the listening times to the server
+    updateListeningTimesToServer(songId, times) {
+        const listeningTimesApiUrl = `/api/history/listeningTimes/${songId}`;
+        fetch(listeningTimesApiUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ times })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+    }
+
+    // Update liked song to the server
+    updateLikedSongToServer(songId, liked) {
+        const likeSongApiUrl = `/api/history/likeSong/${songId}`;
+        fetch(likeSongApiUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ liked })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
     }
 
     // Update the displayed song information
@@ -147,7 +213,6 @@ export default class MusicPlayer {
         queueElement.innerHTML = '';
         for (var i = currentIndex + 1;i < this.#songData.length;i++){
             let imgUrl = `${HOST_URL_IMG}${this.#songData[i].id}.jpg?raw=true`;
-            console.log(imgUrl);
             let songQueueElement = document.createElement('li');
             songQueueElement.classList.add('music-items');
             songQueueElement.innerHTML = 
@@ -192,12 +257,14 @@ export default class MusicPlayer {
     playAudio() {
         this.#audio.play();
         this.isPlaying = true;
+        this.secondsCounterStart();
     }
 
     // Pause the audio
     pauseAudio() {
         this.#audio.pause();
         this.isPlaying = false;
+        this.secondsCounterStop();
     }
 
     // Update the play button icon
@@ -208,20 +275,40 @@ export default class MusicPlayer {
 
     //shuffer
 
+    toggleOnOffButton(button){
+        button.classList.toggle('btn-on');
+        button.classList.toggle('btn-off');
+    }
+
     shufferMusic(){
-        console.log(this.shuffButton);
+        this.toggleOnOffButton(this.shuffButton);
         if (this.shuffer){ 
             this.shuffer = false;
-            this.shuffButton.style.color = 'black';
         }
         else {
             this.shuffer = true;
-            this.shuffButton.style.color = '#39aae2';
         }
     }
     // Navigate to the previous or next song
     navigateSong(direction) {
+        // Update the listening times to the server
+        this.secondsCounterStop();
+        this.updateListeningTimesToServer(this.#songData[this.currentSongIndex].id, this.#timeInSeconds);
+        this.#timeInSeconds = 0;
+
+        // Update the liked song to the server
+        if (this.likeButton.classList.contains('btn-on') && !(this.#likedSongs.includes(this.#songData[this.currentSongIndex].id))) {
+            this.updateLikedSongToServer(this.#songData[this.currentSongIndex].id, true);
+            this.#likedSongs.push(this.#songData[this.currentSongIndex].id);
+        }
+        if (this.likeButton.classList.contains('btn-off') && this.#likedSongs.includes(this.#songData[this.currentSongIndex].id)) {
+            this.updateLikedSongToServer(this.#songData[this.currentSongIndex].id, false);
+            this.#likedSongs.splice(this.#likedSongs.indexOf(this.#songData[this.currentSongIndex].id), 1);
+        }
+
+        // toggle play button
         if (!this.isPlaying) this.togglePlayButtonIcon();
+        // Navigate to the next song
         if (this.shuffer){
             this.currentSongIndex = Math.floor(Math.random() * this.#songData.length) % this.#songData.length;
         }
@@ -234,6 +321,23 @@ export default class MusicPlayer {
         if (!this.#timerInterval) {
             this.#timerInterval = setInterval(() => this.displayTimer(), 1000);
         }
+    }
+
+    // Toggle the like button
+    toggleLike() {
+        this.toggleOnOffButton(this.likeButton);
+    }
+
+    // Seconds counter
+    secondsCounterStart() {
+        this.#secondsInterval = setInterval(() => {
+            this.#timeInSeconds++;
+            console.log(this.#timeInSeconds);
+        }, 1000);
+    }
+
+    secondsCounterStop() {
+        clearInterval(this.#secondsInterval);
     }
 
     // Convert time in seconds to minutes and seconds

@@ -293,6 +293,14 @@ a .circle:hover{
   cursor: pointer;
 }
 
+.btn-on {
+  color: #00d92f;
+}
+
+.btn-off {
+  color: #ffffff;
+}
+
 .fa-pause{
   font-size: 19px;
 }
