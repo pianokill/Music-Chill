@@ -66,8 +66,19 @@ class songController {
 
     async getSongs(req, res) {
         const songData = await songModel.getAllSongs();
-        console.log(songData);
         res.json(songData);
+    }
+    async getRecommendations(req, res) {
+        const user_id = req.user.id;
+        try {
+            const result = await axios.get(`http://localhost:8000/predict/${user_id}/10`);
+            console.log(result.data)
+            const songData = result.data;
+            res.json(songData);
+        } catch (error) {
+            throw new Error(`Error getting recommendations ${error.message}`);;
+        }
+        
     }
 }
 
