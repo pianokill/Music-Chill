@@ -4,7 +4,6 @@ from fastapi import FastAPI, HTTPException
 import uvicorn
 import psycopg
 from apscheduler.schedulers.background import BackgroundScheduler
-import random 
 
 app = FastAPI()
 
@@ -46,7 +45,7 @@ def normalize_listening_time(listening_time, min_time, max_time):
     return 5 * (listening_time - min_time) / (max_time - min_time)
 
 def get_rate_train(data):
-    data['song_id'] = data['song_id'].fillna(random.randint(1,10))
+    data['song_id'] = data['song_id'].fillna(1)
     data = data.fillna(0)
     rate_train = data.to_numpy()
     min_time = rate_train[:, 2].min()
@@ -81,13 +80,10 @@ def get_prediction(user_id: int, k: int):
         update_model()
     else:
         predictions = rs.top_k(user_id - 1, k)
-        if predictions:
-            song_details = get_song_details(predictions)
-            result = [{"id": song_id, "name": song_details[song_id]["name"], "artist": song_details[song_id]["artist"]}
-                    for song_id in predictions]
-            return result
-        else:
-            raise HTTPException(status_code=404, detail="Can not get with invalid k.")
+        song_details = get_song_details(predictions)
+        result = [{"id": song_id, "name": song_details[song_id]["name"], "artist": song_details[song_id]["artist"]}
+                  for song_id in predictions]
+        return result
 
 if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=8000)

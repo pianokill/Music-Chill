@@ -96,6 +96,8 @@ class SVD_RS(object):
 
         return predicted_ratings
     def top_k(self, user_id, k):
+        if k <= 0:
+            return []
         predicted_ratings = self.pred_for_user(user_id)
         sorted_predictions = sorted(predicted_ratings, key=lambda x: x[1], reverse=True)
         top_k_items = sorted_predictions[:k]
