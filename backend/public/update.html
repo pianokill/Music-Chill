@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update | Music&Chill</title>
+  <link rel="stylesheet" href="/styles/update.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="profile-header">
+      <img id="profileID" alt="avatar" class="profile-picture" src="/images/profile-picture.png">
+      <label for="input-file"></label>
+      <div class="profile-info">
+        <h1>Johnny</h1>
+        <p>@johndoe</p>
+      </div>
+    </header>
+
+    <div class="menubtn" onclick="menuFunction(this)">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+
+    <div class="dropdown-content">
+      <a href="/profile"><button class="button-style">Profile</button></a>
+      <a href="/auth/logout"><button class="button-style">Logout</button></a>
+    </div>
+
+    <div class="mussiclist">
+      <h1>Music List</h1>
+      <ul id="songList"></ul>
+   </div>
+
+   <div id="overlay" class="overlay">
+    <div class="overlay-content">
+        <span id="closeOverlay" class="close">&times;</span>
+        <h2>Update Song Name</h2>
+        <input type="text" id="newSongName" placeholder="Enter new song name">
+        <button id="saveSongNameBtn">Save</button>
+    </div>
+
+
+  </div>
+  <script src="/js/update.js"></script>
+
+
+</body>
+</html> 

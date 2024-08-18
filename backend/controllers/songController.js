@@ -68,6 +68,28 @@ class songController {
         const songData = await songModel.getAllSongs();
         res.json(songData);
     }
+
+    async getSongByID(req, res){
+        try {
+            const songData = await songModel.getSong(req.user.id);
+            return songData;
+        } catch (error) {
+            return [];
+        }
+    }
+    updateSongData = async (req, res) => {
+        try {
+            await req.body.forEach(element => {
+                songModel.updateSongName(element.id, element.name)
+            });
+            return res.json({
+                message: "Updated successfully",
+                error: false,
+              });
+        } catch (err) {
+          res.json({message: err, error: true});
+        }  
+      };
 }
 
 export default new songController();
