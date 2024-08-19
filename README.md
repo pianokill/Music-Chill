@@ -1,6 +1,13 @@
+## Installation for Python server
+Install all the packages in requirement.txt
+```sh
+$ cd rs/
+$ pip install -r requirement.txt
+$ python main.py
+```
 
 
-## Installation
+## Installation for NodeJS server
 Install NodeJS: https://nodejs.org/en
 
 
