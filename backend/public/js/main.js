@@ -37,6 +37,9 @@ const player = new MusicPlayer({
     popupSelectors:{
         popup: '.popup',
         closePopup: '.popup .cancel',
+        inputPlaylist: '.create-playlist .square',
+        inputCancel: '.create-playlist .input-cancel',
+        createPlaylist: '.input-playlist button',
     }
 });
 

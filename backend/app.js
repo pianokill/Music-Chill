@@ -3,6 +3,7 @@ import uploadRouter from './routers/uploadRouter.js';
 import songRouter from './routers/songRouter.js';
 import historyRouter from './routers/historyRouter.js';
 import profileRouter from './routers/profileRouter.js';
+import playlistRouter from './routers/playlistRouter.js';
 import passport from "./utils/passport.js";
 import express from 'express';
 import session from 'express-session';
@@ -63,7 +64,10 @@ app.use("/profile", profileRouter);
 // API route to get song data
 app.use('/api/songs', songRouter);
 // API route to get history data
-app.use('/api/history', historyRouter)
+app.use('/api/history', historyRouter);
+// API route to get playlist data
+app.use('/api/playlists', playlistRouter);
+
 
 // Send the main HTML file on the root route
 app.get('/', (req, res) => {

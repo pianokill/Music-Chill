@@ -6,6 +6,7 @@ export default class MusicPlayer {
     #audio;
     #songData = [];
     #likedSongs = [];
+    #playlists = [];
     #timeInSeconds = 0;
     #timerInterval;
     #secondsInterval;
@@ -38,6 +39,9 @@ export default class MusicPlayer {
 
         this.popup = document.querySelector(config.popupSelectors.popup);
         this.closePopup = document.querySelector(config.popupSelectors.closePopup);
+        this.inputPlaylistButton = document.querySelector(config.popupSelectors.inputPlaylist);
+        this.inputCancelButton = document.querySelector(config.popupSelectors.inputCancel);
+        this.createPlaylistButton = document.querySelector(config.popupSelectors.createPlaylist);
 
         this.#audio = new Audio();
         this.isPlaying = false;
@@ -64,6 +68,9 @@ export default class MusicPlayer {
 
         this.addButton.addEventListener('click', () => this.togglePopup());
         this.closePopup.addEventListener('click', () => this.togglePopup());
+        this.inputPlaylistButton.addEventListener('click', () => this.inputPlaylist());
+        this.inputCancelButton.addEventListener('click', () => this.inputCancel());
+        this.createPlaylistButton.addEventListener('click', () => this.createPlaylist());
     }
 
     // Initialize the music player
@@ -72,13 +79,29 @@ export default class MusicPlayer {
             this.#songData = await this.fetchSongData();
             const data = await this.fetchLikedSongs();
             this.#likedSongs = data.map(song => song.id);
+            this.#playlists = await this.fetchUserPlaylists();
             if (this.#songData.length > 0) {
                 this.loadSong(this.currentSongIndex);
             }
             await this.fetchMiddleSectionSongs(); // Fetch for the middle section
+            this.displayLeftSectionPlaylists();
 
         } catch (error) {
             console.error("Failed to fetch songs:", error);
+        }
+    }
+
+    async fetchUserPlaylists() {
+        const userPlaylistApiUrl = '/api/playlists/user';
+        try {
+            const response = await fetch(userPlaylistApiUrl);
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching user playlist:', error);
+            throw error;
         }
     }
 
@@ -125,6 +148,85 @@ export default class MusicPlayer {
             throw error;
         }
     }
+
+    // Create a new playlist
+    async createPlaylist() {
+        const playlistName = this.popup.querySelector('.input-playlist input[type=text]').value;
+        const isPublic = this.popup.querySelector('.input-playlist input[type=checkbox]').checked;
+        
+        const createPlaylistApiUrl = '/api/playlists/create';
+        try {
+            const response = await fetch(createPlaylistApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: playlistName, is_public: isPublic })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            const data = await response.json();
+            console.log('Created playlist:', data);
+            this.#playlists.push(data);
+        } catch (error) {
+            console.error('Error creating playlist:', error);
+            throw error;
+        }
+        this.popup.querySelector('.input-playlist input[type=text]').value = '';
+        this.popup.querySelector('.input-playlist input[type=checkbox]').checked = false;
+        this.popup.querySelector('.title-container').classList.toggle('hide');
+        this.popup.querySelector('.input-playlist').classList.toggle('hide');
+        this.displayPlaylistPopup();
+        this.displayLeftSectionPlaylists();
+    }
+
+    // Input a new playlist
+    async inputPlaylist() {
+        this.popup.querySelector('.title-container').classList.toggle('hide');
+        this.popup.querySelector('.input-playlist').classList.toggle('hide');
+        this.popup.querySelector('.input-playlist input[type=text]').focus();
+    }
+
+    // Undo create playlist
+    async inputCancel() {
+        this.popup.querySelector('.title-container').classList.toggle('hide');
+        this.popup.querySelector('.input-playlist').classList.toggle('hide');
+    }
+
+    // Display the playlist in the left section
+    displayLeftSectionPlaylists() {
+        const playlistElement = document.querySelector('.playlist-left .music-list');
+        playlistElement.innerHTML = ''; // Clear existing content
+        for (let playlist of this.#playlists) {
+            const playlistItem = document.createElement('li');
+            playlistItem.classList.add('music-items');
+            playlistItem.innerHTML = `
+                <div class="item-img"></div>
+                <div class="item-info">
+                    <div class="item-name">${playlist.name}</div>
+                    <div class="item-artist">${playlist.is_public ? 'Public' : 'Private'}</div>
+                </div>`;
+            playlistElement.appendChild(playlistItem);
+        }
+    }
+
+    // Display playlist in the popup
+    displayPlaylistPopup() {
+        const playlistElement = document.querySelector('.popup .music-list');
+        playlistElement.innerHTML = ''; // Clear existing content
+        for (let playlist of this.#playlists) {
+            const playlistItem = document.createElement('li');
+            playlistItem.classList.add('music-items');
+            playlistItem.innerHTML = `
+                <div class="item-img"></div>
+                <div class="item-info">
+                    <div class="item-name">${playlist.name}</div>
+                    <div class="item-artist">${playlist.is_public ? 'Public' : 'Private'}</div>
+                </div>`;
+            playlistElement.appendChild(playlistItem);
+        }
+    }
     
     // Add this method to display the fetched songs in the middle section
     displayMiddleSectionSongs(middleSongs) {
@@ -143,6 +245,37 @@ export default class MusicPlayer {
                 </div>`;
             middleSectionElement.appendChild(songElement);
         });
+    }
+
+    // Display the queue songs
+    displayQueueSongs(currentIndex){
+        let queueElement = document.querySelector('ul.queue');
+        queueElement.innerHTML = '';
+        for (var i = currentIndex + 1;i < this.#songData.length;i++){
+            let imgUrl = `${HOST_URL_IMG}${this.#songData[i].id}.jpg?raw=true`;
+            let songQueueElement = document.createElement('li');
+            songQueueElement.classList.add('music-items');
+            songQueueElement.innerHTML = 
+            `<div class="item-img" style="background-image: url(${imgUrl})"></div>
+            <div class="item-info">
+                <div class="item-name">${this.#songData[i].name}</div>
+                <div class="item-owner">${this.#songData[i].artist}</div>
+            </div>`;
+            queueElement.appendChild(songQueueElement);
+        }
+        for (var i = 0;i < currentIndex;i++){
+            let imgUrl = `${HOST_URL_IMG}${this.#songData[i].id}.jpg?raw=true`;
+            console.log(imgUrl);
+            let songQueueElement = document.createElement('li');
+            songQueueElement.classList.add('music-items');
+            songQueueElement.innerHTML = 
+            `<div class="item-img" style="background-image: url(${imgUrl})"></div>
+            <div class="item-info">
+                <div class="item-name">${this.#songData[i].name}</div>
+                <div class="item-owner">${this.#songData[i].artist}</div>
+            </div>`;
+            queueElement.appendChild(songQueueElement);
+        }
     }
 
     // Load and play the song by index
@@ -206,36 +339,6 @@ export default class MusicPlayer {
         this.songNameElement.textContent = song.name;
         this.artistElement.textContent = song.artist;
         this.songImgElement.style.backgroundImage = `url(${imageUrl})`;
-    }
-
-    displayQueueSongs(currentIndex){
-        let queueElement = document.querySelector('ul.queue');
-        queueElement.innerHTML = '';
-        for (var i = currentIndex + 1;i < this.#songData.length;i++){
-            let imgUrl = `${HOST_URL_IMG}${this.#songData[i].id}.jpg?raw=true`;
-            let songQueueElement = document.createElement('li');
-            songQueueElement.classList.add('music-items');
-            songQueueElement.innerHTML = 
-            `<div class="item-img" style="background-image: url(${imgUrl})"></div>
-            <div class="item-info">
-                <div class="item-name">${this.#songData[i].name}</div>
-                <div class="item-owner">${this.#songData[i].artist}</div>
-            </div>`;
-            queueElement.appendChild(songQueueElement);
-        }
-        for (var i = 0;i < currentIndex;i++){
-            let imgUrl = `${HOST_URL_IMG}${this.#songData[i].id}.jpg?raw=true`;
-            console.log(imgUrl);
-            let songQueueElement = document.createElement('li');
-            songQueueElement.classList.add('music-items');
-            songQueueElement.innerHTML = 
-            `<div class="item-img" style="background-image: url(${imgUrl})"></div>
-            <div class="item-info">
-                <div class="item-name">${this.#songData[i].name}</div>
-                <div class="item-owner">${this.#songData[i].artist}</div>
-            </div>`;
-            queueElement.appendChild(songQueueElement);
-        }
     }
 
     // Toggle play and pause state
@@ -425,5 +528,8 @@ export default class MusicPlayer {
 
     togglePopup(){
         this.popup.classList.toggle('hide');
+        if (!this.popup.classList.contains('hide')){
+            this.displayPlaylistPopup();
+        }
     }
 }
