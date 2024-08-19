@@ -63,6 +63,7 @@ app.use("/profile", profileRouter);
 
 // API route to get song data
 app.use('/api/songs', songRouter);
+
 // API route to get history data
 app.use('/api/history', historyRouter);
 // API route to get playlist data

@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
     }
 });
 
+
 router.post("/signin", userController.signIn);
 
 router.post("/signup", userController.signUp);

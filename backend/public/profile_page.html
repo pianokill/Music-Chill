@@ -60,13 +60,28 @@
     <div class="dropdown-content">
       <a href="#"><button class="button-style">Profile</button></a>
       <a href="#"><button class="button-style">Setting</button></a>
-      <a href="/profile/statistics"><button class="button-style">Statistics</button></a>
+      <a href="#statistic" id = "bstatistic"><button class="button-style">Statistics</button></a>
+      <a href="/profile/update" id="updateSong"><button class="button-style">Update Song</button></a>
       <a href="#"><button class="button-style">Upload</button></a>
       <a href="/auth/logout"><button class="button-style">Logout</button></a>
     </div>
 
+    
+    <section class="statistic" id ="statistic">
+        <h1>Statistics Demonstration</h1>
+        <div class="statistic-chart">
+        <select id="statType">
+            <option value="likes_playing_time">Likes and Playing Time</option>
+        </select>
+        <canvas id="songsChart"></canvas>
+    </div>
+    </section>
+   
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <script src="/js/statistics.js"></script>
   <script>
 
     function insertPicture(x){
@@ -98,7 +113,25 @@
         }
       }
     }
-
+    // read in4
+    function checkArtist() {
+      const value = `${document.cookie}`;
+      const decodedCookie = decodeURIComponent(value);
+      const jsonString = decodedCookie.split('=')[1]
+      const user = JSON.parse(jsonString)
+      console.log(user)
+      if (user.check == false){
+        document.getElementById('statistic').style.display = 'none';
+        document.getElementById('bstatistic').style.display = 'none';
+        document.getElementById('updateSong').style.display = 'none';
+        document.querySelector(".profile-info h1").textContent = user.name
+        document.querySelector(".profile-info p").textContent = user.mail
+      } else{
+        document.querySelector(".profile-info h1").textContent = user.name
+        document.querySelector(".profile-info p").textContent = user.mail
+      }
+  }
+  checkArtist()
   </script>
 </body>
 </html> 

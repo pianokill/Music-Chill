@@ -68,18 +68,28 @@ class songController {
         const songData = await songModel.getAllSongs();
         res.json(songData);
     }
-    async getRecommendations(req, res) {
-        const user_id = req.user.id;
+
+    async getSongByID(req, res){
         try {
-            const result = await axios.get(`http://localhost:8000/predict/${user_id}/10`);
-            console.log(result.data)
-            const songData = result.data;
-            res.json(songData);
+            const songData = await songModel.getSong(req.user.id);
+            return songData;
         } catch (error) {
-            throw new Error(`Error getting recommendations ${error.message}`);;
+            return [];
         }
-        
     }
+    updateSongData = async (req, res) => {
+        try {
+            await req.body.forEach(element => {
+                songModel.updateSongName(element.id, element.name)
+            });
+            return res.json({
+                message: "Updated successfully",
+                error: false,
+              });
+        } catch (err) {
+          res.json({message: err, error: true});
+        }  
+      };
 }
 
 export default new songController();
