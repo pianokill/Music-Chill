@@ -51,6 +51,7 @@ class userModel {
             throw new Error(`Error updating user password: ${error.message}`);
         }
     }
+
 };
 
 export default new userModel();

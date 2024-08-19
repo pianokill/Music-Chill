@@ -46,8 +46,12 @@ class userController {
   };
 
   logout = async (req, res, next) => {
-    res.clearCookie("connect.sid");
-    res.redirect("/");
+    try {
+      res.clearCookie("connect.sid");
+      res.redirect("/");
+    } catch (error) {
+      res.redirect("/");
+    }  
   };
 
   checkEmail = async (req, res) => {

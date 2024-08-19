@@ -57,6 +57,35 @@ class songModel {
             throw new Error(`Error getting all songs: ${error.message}`);
         }
     }
+
+    async getSong(artist_id) {
+        const query = `
+            SELECT s.id, s.name
+            FROM songs s
+            WHERE s.artist_id = $1
+        `;
+        try {
+            const result = await pool.query(query, [artist_id]);
+            return result.rows;
+        } catch (error) {
+            throw new Error(`Error getting: ${error.message}`);
+        }
+    }
+
+    async updateSongName(song_id, song_name) {
+        const query = `
+            UPDATE songs
+            SET name = $2
+            WHERE id = $1
+            RETURNING *
+        `;
+        try {
+            await pool.query(query, [song_id, song_name]);
+            return true;
+        } catch (error) {
+            throw new Error(`Error getting: ${error.message}`);
+        }
+    }
 };
 
 export default new songModel();

@@ -114,7 +114,7 @@ body{
 .music-items .item-img{
   width: 48px;
   height: 48px;
-  background-image: url('https://github.com/fantastichaha11/storage/blob/main/image/1.jpg?raw=true');
+  background-image: url('../images/playlist-cover.jpg');
   background-size: cover;
   border-radius: 5%;
 }
@@ -345,7 +345,7 @@ a .circle:hover{
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .playingbar-right{
@@ -407,19 +407,19 @@ a .circle:hover{
   margin-right: 10px;
 }
 
-.popup .addPlaylist .create-playlist {
+.popup .addPlaylist .input-cancel{
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.popup .addPlaylist .create-playlist > div {
   display: flex;
   align-items: center;
   gap: 8px;
-  cursor: pointer;
   border-radius: 5px;
   width: 96%;
   padding: 8px 8px;
   border: solid 1px var(--black-color);
-}
-
-.popup .addPlaylist .create-playlist:hover{
-  border: solid 1px var(--white-color);
 }
 
 .popup .addPlaylist .create-playlist .square{
@@ -430,6 +430,11 @@ a .circle:hover{
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+
+.popup .addPlaylist .create-playlist .square:hover{
+  border: solid 1px var(--white-color);
 }
 
 .popup .addPlaylist .create-playlist .title{
