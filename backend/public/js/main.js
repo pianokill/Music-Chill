@@ -40,6 +40,10 @@ const player = new MusicPlayer({
         inputPlaylist: '.create-playlist .square',
         inputCancel: '.create-playlist .input-cancel',
         createPlaylist: '.input-playlist button',
+        playlist: 'ul.create-playlist',
+    },
+    leftSelectors:{
+        playlist: '.playlist-left ul',
     }
 });
 
