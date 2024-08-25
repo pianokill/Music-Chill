@@ -5,15 +5,18 @@ import uvicorn
 import psycopg
 from apscheduler.schedulers.background import BackgroundScheduler
 import random 
+from dotenv import load_dotenv
+import os
 
+load_dotenv("../backend/.env")
 app = FastAPI()
 
 def get_raw_data():
-    conn = psycopg.connect(host="dpg-cqia252j1k6c739b5fr0-a.singapore-postgres.render.com",
-                           dbname="music_chill",
-                           user="group4",
-                           password="Ijzmij4jthXYG8lUavYi7KmJia4c8Cjw",
-                           port=5432)
+    conn = psycopg.connect(host=os.getenv("HOST"),
+                           dbname=os.getenv("DATABASE"),
+                           user=os.getenv("USER"),
+                           password=os.getenv("PASSWORD"),
+                           port=os.getenv("DATABASE_PORT"))
     cur = conn.cursor()
     cur.execute("SELECT u.id, h.song_id, h.listening_times, h.liked FROM users u left join user_history h on u.id = h.user_id")
     rows = cur.fetchall()
@@ -23,11 +26,11 @@ def get_raw_data():
     return raw_data
 
 def get_song_details(song_ids):
-    conn = psycopg.connect(host="dpg-cqia252j1k6c739b5fr0-a.singapore-postgres.render.com",
-                           dbname="music_chill",
-                           user="group4",
-                           password="Ijzmij4jthXYG8lUavYi7KmJia4c8Cjw",
-                           port=5432)
+    conn = psycopg.connect(host=os.getenv("HOST"),
+                           dbname=os.getenv("DATABASE"),
+                           user=os.getenv("USER"),
+                           password=os.getenv("PASSWORD"),
+                           port=os.getenv("DATABASE_PORT"))
     cur = conn.cursor()
     format_strings = ','.join(['%s'] * len(song_ids))
     query = f"""

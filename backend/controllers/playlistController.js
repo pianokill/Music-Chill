@@ -14,6 +14,18 @@ class playlistController {
         const playlists = await playlistModel.getAllUserPlaylist(userId);
         res.json(playlists);
     }
+
+    async addSongToPlaylist(req, res) {
+        const { playlistId, songId } = req.body;
+        await playlistModel.addSongToPlaylist(playlistId, songId);
+        res.json({ message: "Song added to playlist successfully" });
+    }
+
+    async getPlaylistSongs(req, res) {
+        const playlistId = req.params.playlistId;
+        const songs = await playlistModel.getPlaylistSongs(playlistId);
+        res.json(songs);
+    }
 }
 
 export default new playlistController();

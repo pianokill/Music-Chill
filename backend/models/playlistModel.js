@@ -40,6 +40,22 @@ class playlistModel {
         }
     }
 
+    async getPlaylistSongs(playlist_id) {
+        const query = `
+            SELECT s.id, s.name, u.name AS artist
+            FROM songs s
+            JOIN users u ON s.artist_id = u.id
+            JOIN playlist_song ps ON s.id = ps.song_id
+            WHERE ps.playlist_id = $1
+        `;
+        try {
+            const result = await pool.query(query, [playlist_id]);
+            return result.rows;
+        } catch (error) {
+            throw new Error(`Error getting playlist songs: ${error.message}`);
+        }
+    }
+
 }
 
 export default new playlistModel();

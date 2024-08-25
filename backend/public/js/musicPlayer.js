@@ -42,6 +42,9 @@ export default class MusicPlayer {
         this.inputPlaylistButton = document.querySelector(config.popupSelectors.inputPlaylist);
         this.inputCancelButton = document.querySelector(config.popupSelectors.inputCancel);
         this.createPlaylistButton = document.querySelector(config.popupSelectors.createPlaylist);
+        this.playlistElement = document.querySelector(config.popupSelectors.playlist);
+
+        this.leftPlaylist = document.querySelector(config.leftSelectors.playlist);
 
         this.#audio = new Audio();
         this.isPlaying = false;
@@ -71,6 +74,9 @@ export default class MusicPlayer {
         this.inputPlaylistButton.addEventListener('click', () => this.inputPlaylist());
         this.inputCancelButton.addEventListener('click', () => this.inputCancel());
         this.createPlaylistButton.addEventListener('click', () => this.createPlaylist());
+        this.playlistElement.addEventListener('click', (e) => this.addSongToPlaylist(e));
+
+        this.leftPlaylist.addEventListener('click', (e) => this.loadPlaylist(e));
     }
 
     // Initialize the music player
@@ -149,6 +155,50 @@ export default class MusicPlayer {
         }
     }
 
+    // Fetch playlist songs from the API
+    async fetchPlaylistSongs(playlistId) {
+        const playlistSongsApiUrl = `/api/playlists/${playlistId}`;
+        try {
+            const response = await fetch(playlistSongsApiUrl);
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching playlist songs:', error);
+            throw error;
+        }
+    }
+
+    // Add song to playlist
+    async addSongToPlaylist(e) {
+        const playlistItem = e.target.closest('li');
+        if (!playlistItem) return;
+        const playlistIndex = Array.from(this.playlistElement.children).indexOf(playlistItem);
+        const playlist = this.#playlists[playlistIndex];
+        console.log('Adding song to playlist:', playlist);
+        const song = this.#songData[this.currentSongIndex];
+        console.log('Adding song to playlist:', song);
+        const addSongApiUrl = '/api/playlists/addSong';
+        try {
+            const response = await fetch(addSongApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ playlistId: playlist.id, songId: song.id })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            alert('Song added to playlist successfully');
+            console.log('Added song to playlist:', playlist, song);
+        } catch (error) {
+            console.error('Error adding song to playlist:', error);
+            throw error;
+        }
+    }
+
     // Create a new playlist
     async createPlaylist() {
         const playlistName = this.popup.querySelector('.input-playlist input[type=text]').value;
@@ -213,8 +263,7 @@ export default class MusicPlayer {
 
     // Display playlist in the popup
     displayPlaylistPopup() {
-        const playlistElement = document.querySelector('.popup .music-list');
-        playlistElement.innerHTML = ''; // Clear existing content
+        this.playlistElement.innerHTML = ''; // Clear existing content
         for (let playlist of this.#playlists) {
             const playlistItem = document.createElement('li');
             playlistItem.classList.add('music-items');
@@ -224,7 +273,7 @@ export default class MusicPlayer {
                     <div class="item-name">${playlist.name}</div>
                     <div class="item-artist">${playlist.is_public ? 'Public' : 'Private'}</div>
                 </div>`;
-            playlistElement.appendChild(playlistItem);
+            this.playlistElement.appendChild(playlistItem);
         }
     }
     
@@ -277,6 +326,22 @@ export default class MusicPlayer {
             queueElement.appendChild(songQueueElement);
         }
     }
+
+    // Load playlist songs
+    async loadPlaylist(e) {
+        const playlistItem = e.target.closest('li');
+        if (!playlistItem) return;
+        const playlistIndex = Array.from(this.leftPlaylist.children).indexOf(playlistItem);
+        console.log('Loading playlist:', playlistIndex);
+        const playlist = this.#playlists[playlistIndex];
+        console.log('Loading playlist:', playlist);
+        const playlistSongs = await this.fetchPlaylistSongs(playlist.id);
+        console.log('Loaded playlist songs:', playlistSongs);
+        this.#songData = playlistSongs;
+        this.currentSongIndex = 0;
+        this.loadSong(this.currentSongIndex);
+    }
+
 
     // Load and play the song by index
     loadSong(index) {
