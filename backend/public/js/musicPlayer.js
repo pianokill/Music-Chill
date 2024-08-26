@@ -280,6 +280,7 @@ export default class MusicPlayer {
     // Add this method to display the fetched songs in the middle section
     displayMiddleSectionSongs(middleSongs) {
         const middleSectionElement = document.querySelector('.home .music-list');
+        
         middleSectionElement.innerHTML = ''; // Clear existing content
     
         middleSongs.forEach(song => {
@@ -290,10 +291,11 @@ export default class MusicPlayer {
                 <div class="item-img" style="background-image: url(${imgUrl})"></div>
                 <div class="item-info">
                     <div class="item-name">${song.name}</div>
-                    <div class="item-artist">${song.artist}</div>
+                    <div class="item-owner">${song.artist}</div>
                 </div>`;
             middleSectionElement.appendChild(songElement);
         });
+        middleSectionElement.addEventListener('click', (e) => this.changeSong(e));
     }
 
     // Display the queue songs
@@ -314,7 +316,6 @@ export default class MusicPlayer {
         }
         for (var i = 0;i < currentIndex;i++){
             let imgUrl = `${HOST_URL_IMG}${this.#songData[i].id}.jpg?raw=true`;
-            console.log(imgUrl);
             let songQueueElement = document.createElement('li');
             songQueueElement.classList.add('music-items');
             songQueueElement.innerHTML = 
@@ -585,6 +586,7 @@ export default class MusicPlayer {
     changeSong(e){
         let temp = e.target;
         let song = temp.closest('li');
+        console.log(song);
         let name = song.querySelector('.item-name').innerHTML;
         let artist = song.querySelector('.item-owner').innerHTML;
         let i = this.#songData.findIndex(s => {return s.name === name && s.artist === artist});
