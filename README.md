@@ -1,5 +1,5 @@
 ## Installation for Python server
-Install all the packages in requirement.txt
+Install all the packages in requirements.txt
 ```sh
 $ cd rs/
 $ pip install -r requirement.txt
