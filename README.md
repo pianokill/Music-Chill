@@ -2,7 +2,7 @@
 Install all the packages in requirements.txt
 ```sh
 $ cd rs/
-$ pip install -r requirement.txt
+$ pip install -r requirements.txt
 $ python main.py
 ```
 
